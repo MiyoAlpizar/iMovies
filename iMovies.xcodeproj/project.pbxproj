@@ -99,13 +99,9 @@
 		6A74C8C02740401F00376CDA /* iMovies */ = {
 			isa = PBXGroup;
 			children = (
-				6A74C8C12740401F00376CDA /* AppDelegate.swift */,
-				6A74C8C32740401F00376CDA /* SceneDelegate.swift */,
-				6A74C8C52740401F00376CDA /* ViewController.swift */,
-				6A74C8C72740401F00376CDA /* Main.storyboard */,
-				6A74C8CA2740402000376CDA /* Assets.xcassets */,
-				6A74C8CC2740402000376CDA /* LaunchScreen.storyboard */,
-				6A74C8CF2740402000376CDA /* Info.plist */,
+				6A74C8F4274040F600376CDA /* Detail */,
+				6A74C8F3274040DB00376CDA /* Home */,
+				6A74C8F2274040CC00376CDA /* Default */,
 			);
 			path = iMovies;
 			sourceTree = "<group>";
@@ -125,6 +121,34 @@
 				6A74C8E42740402000376CDA /* iMoviesUITestsLaunchTests.swift */,
 			);
 			path = iMoviesUITests;
+			sourceTree = "<group>";
+		};
+		6A74C8F2274040CC00376CDA /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				6A74C8C12740401F00376CDA /* AppDelegate.swift */,
+				6A74C8C32740401F00376CDA /* SceneDelegate.swift */,
+				6A74C8C52740401F00376CDA /* ViewController.swift */,
+				6A74C8C72740401F00376CDA /* Main.storyboard */,
+				6A74C8CA2740402000376CDA /* Assets.xcassets */,
+				6A74C8CC2740402000376CDA /* LaunchScreen.storyboard */,
+				6A74C8CF2740402000376CDA /* Info.plist */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		6A74C8F3274040DB00376CDA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6A74C8F4274040F600376CDA /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
