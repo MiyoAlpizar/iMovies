@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailView" customModule="iMovies" customModuleProvider="target">
             <connections>
+                <outlet property="posterImg" destination="Vh9-gt-fco" id="6tB-bp-QFf"/>
                 <outlet property="videoPlayerView" destination="lnh-Jf-7Qv" id="Hdc-HB-QfB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,20 +20,25 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vh9-gt-fco">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnh-Jf-7Qv" customClass="YTPlayerView">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="300" id="Ocl-rO-dU0"/>
-                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Vh9-gt-fco" firstAttribute="height" secondItem="lnh-Jf-7Qv" secondAttribute="height" id="1JT-Lx-Tdr"/>
                 <constraint firstItem="lnh-Jf-7Qv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2cL-su-bt0"/>
+                <constraint firstItem="Vh9-gt-fco" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BWe-H9-cs9"/>
                 <constraint firstItem="lnh-Jf-7Qv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="OS4-Qj-g9W"/>
                 <constraint firstItem="lnh-Jf-7Qv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Xx3-QY-AcD"/>
+                <constraint firstItem="Vh9-gt-fco" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZBf-on-m6m"/>
+                <constraint firstItem="lnh-Jf-7Qv" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="doA-HV-TvI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vh9-gt-fco" secondAttribute="trailing" id="m0h-k8-fQp"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="67.633928571428569"/>
         </view>

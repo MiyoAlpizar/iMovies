@@ -14,18 +14,24 @@ class DetailView: UIViewController {
     
     
     private var disposeBag = DisposeBag()
+    @IBOutlet weak var posterImg: UIImageView!
     @IBOutlet weak var videoPlayerView: YTPlayerView!
     var viewModel: DetailViewModel = DetailViewModel()
-    public var movie: Movie? {
-        didSet {
-            if let movie = movie {
-                loadVideos(id: movie.id)
-            }
-        }
-    }
+    
+    public var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        videoPlayerView.isHidden = true
+        if let movie = movie {
+            setData(movie: movie)
+            
+        }
+    }
+    
+    private func setData(movie: Movie) {
+        posterImg.sd_setImage(with: movie.backdropURL, completed: nil)
+        loadVideos(id: movie.id)
     }
     
     private func loadVideos(id: Int) {

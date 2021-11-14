@@ -18,6 +18,7 @@ extension DetailView: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         videoPlayerView.playVideo()
+        videoPlayerView.isHidden = false
     }
     
 }
