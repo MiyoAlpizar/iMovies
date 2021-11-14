@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 
+///Fetches movies from https://www.themoviedb.org
 class MoviesDBManager: MoviesManagerProtocol {
     
     func getHomeMovies() -> Observable<[HomeMovies]> {

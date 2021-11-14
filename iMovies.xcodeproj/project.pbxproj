@@ -418,7 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				6A85C42C2741CA5D00E38920 /* Helpers */,
-				6A9D2DBF2740DE3700A6E09A /* Protocols */,
 				6A9D2D8D2740717B00A6E09A /* Extensions */,
 				6A9D2D872740518300A6E09A /* Utils.swift */,
 				6A9D2D93274081FE00A6E09A /* Constants.swift */,
@@ -495,13 +494,6 @@
 				6A9D2DCB2740E09400A6E09A /* Router */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		6A9D2DBF2740DE3700A6E09A /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		6A9D2DC62740E03F00A6E09A /* View */ = {

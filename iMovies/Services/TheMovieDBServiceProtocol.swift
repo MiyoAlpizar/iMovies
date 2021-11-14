@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 
+///Protocol to get movies info from  https://www.themoviedb.org
 protocol TheMovieDBServiceProtocol {
     func fetchMovies(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
@@ -22,6 +23,7 @@ enum MovieCategory: String {
     case upcoming
     case topRated = "top_rated"
     case popular
+    case latest
     var description: String {
         switch self {
         case .nowPlaying:
@@ -32,6 +34,8 @@ enum MovieCategory: String {
             return NSLocalizedString("Top Rated", comment: "")
         case .popular:
             return NSLocalizedString("Popular", comment: "")
+        case .latest:
+            return NSLocalizedString("Latest", comment: "")
         }
     }
 }

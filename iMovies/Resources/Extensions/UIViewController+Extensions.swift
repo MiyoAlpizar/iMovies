@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
+    ///Create instance from itself
     static func instance() -> Self {
         let id = String(describing: self)
         return Self(nibName: id, bundle: Bundle.main)

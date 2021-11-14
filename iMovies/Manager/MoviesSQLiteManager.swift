@@ -7,6 +7,8 @@
 
 import RxSwift
 
+
+///Fetches movies from local data base in order to keep alive offline
 class MoviesSQLiteManager: MoviesManagerProtocol {
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in

@@ -90,7 +90,12 @@ extension TheMovieDBService {
             return
         }
         var queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
-        if let params = params {
+        var _params = params
+        if _params == nil {
+            _params = ["language": Locale.current.languageCode ?? "en-US"]
+        }
+        
+        if let params = _params {
             queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value)})
         }
         
