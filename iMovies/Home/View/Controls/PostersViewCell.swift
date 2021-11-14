@@ -12,10 +12,17 @@ class PostersViewCell: UITableViewCell {
     static let NAME = "PostersViewCell"
     
     
+    @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     public var category: MovieCategory?
-    
+    {
+        didSet {
+            if let category = category {
+                categoryName.text = category.description
+            }
+        }
+    }
     public var movies = [Movie]()
     {
         didSet {

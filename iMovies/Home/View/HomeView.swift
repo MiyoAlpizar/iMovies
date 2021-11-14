@@ -67,10 +67,6 @@ extension HomeView {
         return homeMovies[section].movies.count > 0 ? 1 : 0
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return homeMovies[section].category.description
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostersViewCell.NAME) as! PostersViewCell
         cell.category = homeMovies[indexPath.section].category
