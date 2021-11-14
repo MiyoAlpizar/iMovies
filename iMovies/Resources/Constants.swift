@@ -14,8 +14,8 @@ struct Constants {
     }
     
     struct Sizes {
-        static let BigPoster = CGSize(width: 200, height: 260)
-        static let MediumPoster = CGSize(width: 140, height: 182)
+        static let BigPoster = CGSize(width: 200, height: 320)
+        static let MediumPoster = CGSize(width: 120, height: 220)
     }
     
 }
