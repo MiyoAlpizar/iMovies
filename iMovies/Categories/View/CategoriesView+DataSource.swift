@@ -14,12 +14,12 @@ extension CategoriesView {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return genres.count
+        return filteredGenres.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryViewCell.NAME, for: indexPath) as! CategoryViewCell
-        cell.categoryName.text = genres[indexPath.row].name
+        cell.categoryName.text = filteredGenres[indexPath.row].name
         return cell
     }
     

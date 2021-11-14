@@ -22,16 +22,19 @@ class MainTabBarView: UITabBarController {
         navigationHome.tabBarItem.image = UIImage(systemName: "house")
         navigationHome.tabBarItem.selectedImage = UIImage(systemName: "house.filled")
         navigationHome.title = "Home"
+        navigationHome.navigationBar.prefersLargeTitles = true
         
         let navigationCategories = UINavigationController(rootViewController: CategoriesRouter().viewController)
         navigationCategories.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle")
         navigationCategories.tabBarItem.selectedImage = UIImage(systemName: "list.bullet.rectangle.filled")
         navigationCategories.title = "Genres"
+        navigationCategories.navigationBar.prefersLargeTitles = true
         
         let navigationSearch = UINavigationController(rootViewController: SearchRouter().viewController)
         navigationSearch.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         navigationSearch.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass.filled")
         navigationSearch.title = "Search"
+        navigationSearch.navigationBar.prefersLargeTitles = true
         
         viewControllers = [navigationHome, navigationCategories, navigationSearch]
     }
