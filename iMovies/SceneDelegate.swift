@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
+        window?.overrideUserInterfaceStyle = .dark
         
     }
 

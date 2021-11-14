@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func customStyle() {
         UIView.appearance().tintColor = UIColor(named: "AccentColor")
+        
     }
     
     // MARK: UISceneSession Lifecycle
