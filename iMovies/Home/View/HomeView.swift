@@ -24,7 +24,7 @@ class HomeView: UITableViewController {
     }
     
     private func setupTableViewController() {
-        title = "iMovies"
+        navigationItem.title = "iMovies"
         tableView.separatorColor = .clear
         tableView.alwaysBounceVertical = true
         tableView.register(UINib(nibName: "PostersViewCell", bundle: Bundle.main), forCellReuseIdentifier: PostersViewCell.NAME)

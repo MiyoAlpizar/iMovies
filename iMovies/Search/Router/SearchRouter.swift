@@ -1,14 +1,13 @@
 //
-//  HomeRouter.swift
+//  SearchRouter.swift
 //  iMovies
 //
-//  Created by Miyo on 13/11/21.
+//  Created by Miyo on 14/11/21.
 //
 
-import Foundation
 import UIKit
 
-class HomeRouter  {
+class SearchRouter {
     var viewController: UIViewController {
         return createViewController()
     }
@@ -16,7 +15,7 @@ class HomeRouter  {
     private var sourceView: UIViewController?
     
     private func createViewController() -> UIViewController {
-        return HomeView.instance()
+        return SearchView.instance()
     }
     
     func setSourceView(_ sourceView: UIViewController?) {

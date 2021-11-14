@@ -37,6 +37,13 @@
 		6A9D2DB02740D04100A6E09A /* PostersViewCell+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DAF2740D04100A6E09A /* PostersViewCell+DataSource.swift */; };
 		6A9D2DB22740D07B00A6E09A /* HomeView+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DB12740D07B00A6E09A /* HomeView+DataSource.swift */; };
 		6A9D2DB42740D58700A6E09A /* PostersViewCell+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DB32740D58700A6E09A /* PostersViewCell+FlowLayout.swift */; };
+		6A9D2DBB2740D8D700A6E09A /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DB92740D8D700A6E09A /* MainTabBarView.swift */; };
+		6A9D2DC42740E03B00A6E09A /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DC22740E03B00A6E09A /* CategoriesView.swift */; };
+		6A9D2DC52740E03B00A6E09A /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A9D2DC32740E03B00A6E09A /* CategoriesView.xib */; };
+		6A9D2DC92740E05A00A6E09A /* CategoriesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DC82740E05A00A6E09A /* CategoriesRouter.swift */; };
+		6A9D2DCE2740E0B700A6E09A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DCC2740E0B700A6E09A /* SearchView.swift */; };
+		6A9D2DCF2740E0B700A6E09A /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A9D2DCD2740E0B700A6E09A /* SearchView.xib */; };
+		6A9D2DD12740E0C300A6E09A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2DD02740E0C300A6E09A /* SearchRouter.swift */; };
 		94365BCE94CA34E9CDD74549 /* Pods_iMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA08F0633628FBF7E24B121 /* Pods_iMovies.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +101,13 @@
 		6A9D2DAF2740D04100A6E09A /* PostersViewCell+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostersViewCell+DataSource.swift"; sourceTree = "<group>"; };
 		6A9D2DB12740D07B00A6E09A /* HomeView+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+DataSource.swift"; sourceTree = "<group>"; };
 		6A9D2DB32740D58700A6E09A /* PostersViewCell+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostersViewCell+FlowLayout.swift"; sourceTree = "<group>"; };
+		6A9D2DB92740D8D700A6E09A /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		6A9D2DC22740E03B00A6E09A /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		6A9D2DC32740E03B00A6E09A /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesView.xib; sourceTree = "<group>"; };
+		6A9D2DC82740E05A00A6E09A /* CategoriesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRouter.swift; sourceTree = "<group>"; };
+		6A9D2DCC2740E0B700A6E09A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		6A9D2DCD2740E0B700A6E09A /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
+		6A9D2DD02740E0C300A6E09A /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		6B58B272317DDD29B08334D1 /* Pods-iMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovies.debug.xcconfig"; path = "Target Support Files/Pods-iMovies/Pods-iMovies.debug.xcconfig"; sourceTree = "<group>"; };
 		AE19E05F34F61E36C0A5D6C2 /* Pods-iMovies-iMoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovies-iMoviesUITests.debug.xcconfig"; path = "Target Support Files/Pods-iMovies-iMoviesUITests/Pods-iMovies-iMoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC56969CEBCCC57268C7DA9B /* Pods-iMoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesTests.debug.xcconfig"; path = "Target Support Files/Pods-iMoviesTests/Pods-iMoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				6A74C8F4274040F600376CDA /* Detail */,
+				6A9D2DB52740D86700A6E09A /* MainTab */,
 				6A74C8F3274040DB00376CDA /* Home */,
+				6A9D2DBD2740DD8100A6E09A /* Categories */,
+				6A9D2DBE2740DD9200A6E09A /* Search */,
 				6A9D2D7F2740505A00A6E09A /* Services */,
 				6A9D2D972740A8BA00A6E09A /* Manager */,
 				6A9D2D862740516F00A6E09A /* Resources */,
@@ -260,6 +277,7 @@
 		6A9D2D862740516F00A6E09A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A9D2DBF2740DE3700A6E09A /* Protocols */,
 				6A9D2D8D2740717B00A6E09A /* Extensions */,
 				6A9D2D872740518300A6E09A /* Utils.swift */,
 				6A9D2D93274081FE00A6E09A /* Constants.swift */,
@@ -295,6 +313,81 @@
 				6A9D2DA92740C13500A6E09A /* PostersViewCell.xib */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		6A9D2DB52740D86700A6E09A /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DB62740D87A00A6E09A /* View */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		6A9D2DB62740D87A00A6E09A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DB92740D8D700A6E09A /* MainTabBarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6A9D2DBD2740DD8100A6E09A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DC72740E04A00A6E09A /* Router */,
+				6A9D2DC62740E03F00A6E09A /* View */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		6A9D2DBE2740DD9200A6E09A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DCB2740E09400A6E09A /* Router */,
+				6A9D2DCA2740E08F00A6E09A /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		6A9D2DBF2740DE3700A6E09A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6A9D2DC62740E03F00A6E09A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DC22740E03B00A6E09A /* CategoriesView.swift */,
+				6A9D2DC32740E03B00A6E09A /* CategoriesView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6A9D2DC72740E04A00A6E09A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DC82740E05A00A6E09A /* CategoriesRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		6A9D2DCA2740E08F00A6E09A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DCC2740E0B700A6E09A /* SearchView.swift */,
+				6A9D2DCD2740E0B700A6E09A /* SearchView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6A9D2DCB2740E09400A6E09A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				6A9D2DD02740E0C300A6E09A /* SearchRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		73F1DD8A633612C8A1FAE238 /* Pods */ = {
@@ -430,7 +523,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A74C8CE2740402000376CDA /* LaunchScreen.storyboard in Resources */,
+				6A9D2DCF2740E0B700A6E09A /* SearchView.xib in Resources */,
 				6A9D2D9F2740AF9000A6E09A /* MoviePosterCell.xib in Resources */,
+				6A9D2DC52740E03B00A6E09A /* CategoriesView.xib in Resources */,
 				6A74C8CB2740402000376CDA /* Assets.xcassets in Resources */,
 				6A9D2DA32740B8F000A6E09A /* HomeView.xib in Resources */,
 				6A9D2DAB2740C13500A6E09A /* PostersViewCell.xib in Resources */,
@@ -562,12 +657,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A9D2D83274050C100A6E09A /* Movie.swift in Sources */,
+				6A9D2DD12740E0C300A6E09A /* SearchRouter.swift in Sources */,
+				6A9D2DBB2740D8D700A6E09A /* MainTabBarView.swift in Sources */,
 				6A9D2D882740518300A6E09A /* Utils.swift in Sources */,
 				6A9D2DB22740D07B00A6E09A /* HomeView+DataSource.swift in Sources */,
+				6A9D2DCE2740E0B700A6E09A /* SearchView.swift in Sources */,
 				6A9D2DB02740D04100A6E09A /* PostersViewCell+DataSource.swift in Sources */,
 				6A74C8FE2740431500376CDA /* HomeRouter.swift in Sources */,
 				6A9D2D992740A8FA00A6E09A /* MoviesManagerProtocol.swift in Sources */,
 				6A9D2DA22740B8F000A6E09A /* HomeView.swift in Sources */,
+				6A9D2DC42740E03B00A6E09A /* CategoriesView.swift in Sources */,
 				6A9D2D9127407ECF00A6E09A /* APIService.swift in Sources */,
 				6A9D2D812740508C00A6E09A /* TheMovieDBServiceProtocol.swift in Sources */,
 				6A9D2D8C2740715700A6E09A /* UIViewController+Extensions.swift in Sources */,
@@ -578,6 +677,7 @@
 				6A9D2D962740903D00A6E09A /* HomeMovies.swift in Sources */,
 				6A9D2D9B2740A92400A6E09A /* MoviesDBManager.swift in Sources */,
 				6A9D2D9E2740AF9000A6E09A /* MoviePosterCell.swift in Sources */,
+				6A9D2DC92740E05A00A6E09A /* CategoriesRouter.swift in Sources */,
 				6A74C8C42740401F00376CDA /* SceneDelegate.swift in Sources */,
 				6A9D2DB42740D58700A6E09A /* PostersViewCell+FlowLayout.swift in Sources */,
 				6A9D2D94274081FE00A6E09A /* Constants.swift in Sources */,
