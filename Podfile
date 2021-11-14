@@ -8,6 +8,7 @@ target 'iMovies' do
   # Pods for iMovies
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'SDWebImage'
 
   target 'iMoviesTests' do
     inherit! :search_paths

@@ -18,8 +18,11 @@ class MoviesDBManager: MoviesManagerProtocol {
                     homeMovies.append(HomeMovies(category: MovieCategory.topRated, movies: topRated))
                     self.getMovies(category: MovieCategory.upcoming) { upcoming in
                         homeMovies.append(HomeMovies(category: .upcoming, movies: upcoming))
-                        observer.onNext(homeMovies)
-                        observer.onCompleted()
+                        self.getMovies(category: MovieCategory.nowPlaying) { nowPlaying in
+                            homeMovies.append(HomeMovies(category: .nowPlaying, movies: nowPlaying))
+                            observer.onNext(homeMovies)
+                            observer.onCompleted()
+                        }
                     }
                 }
             }
@@ -29,7 +32,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     }
     
     private func getMovies(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
-        TheMovieDBService.shared.fetchMovies(category: MovieCategory.popular) { result in
+        TheMovieDBService.shared.fetchMovies(category: category) { result in
             switch result {
             case .success(let response):
                 if response.results.count > 0 {
