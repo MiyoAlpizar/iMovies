@@ -60,6 +60,14 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
         self.loadURLAndDecode(url: url, completion: completion)
     }
     
+    func fetchGenres(completion: @escaping (Result<GenreResponse, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/genre/movie/list") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
+    }
+    
     
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping(Result<D, MovieError>) -> ()) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {

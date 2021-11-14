@@ -12,7 +12,7 @@ class HomeView: UITableViewController {
     
     var router = HomeRouter()
     private var viewModel = HomeViewModel()
-    private var refreshControll = UIRefreshControl()
+    private var rc = UIRefreshControl()
     var homeMovies = [HomeMovies]()
     private var disposeBag = DisposeBag()
     
@@ -29,8 +29,8 @@ class HomeView: UITableViewController {
         tableView.separatorColor = .clear
         tableView.alwaysBounceVertical = true
         tableView.register(UINib(nibName: "PostersViewCell", bundle: Bundle.main), forCellReuseIdentifier: PostersViewCell.NAME)
-        refreshControll.addTarget(self, action: #selector(loadMovies), for: UIControl.Event.valueChanged)
-        tableView.refreshControl = refreshControl
+        rc.addTarget(self, action: #selector(loadMovies), for: UIControl.Event.valueChanged)
+        self.refreshControl = rc
         
     }
 

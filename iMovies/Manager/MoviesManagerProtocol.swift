@@ -11,4 +11,5 @@ import RxSwift
 protocol MoviesManagerProtocol {
     func getHomeMovies() -> Observable<[HomeMovies]>
     func getMovieVideos(id: Int) -> Observable<[MovieVideo]>
+    func getGenres() -> Observable<[Genre]>
 }

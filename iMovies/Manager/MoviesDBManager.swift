@@ -10,6 +10,8 @@ import RxSwift
 
 class MoviesDBManager: MoviesManagerProtocol {
    
+    
+   
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in
             var homeMovies = [HomeMovies]()
@@ -62,6 +64,21 @@ class MoviesDBManager: MoviesManagerProtocol {
                 print("Error on fetching movies: \(error.localizedDescription)")
                 completion([])
             }
+        }
+    }
+    
+    func getGenres() -> Observable<[Genre]> {
+        return Observable.create { observer in
+            TheMovieDBService.shared.fetchGenres { result in
+                switch result {
+                case .success(let response):
+                    observer.onNext(response.genres)
+                case .failure(let error):
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create {}
         }
     }
     

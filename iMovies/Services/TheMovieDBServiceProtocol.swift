@@ -14,6 +14,7 @@ protocol TheMovieDBServiceProtocol {
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
     func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovieVideos(id: Int, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
+    func fetchGenres(completion: @escaping(Result<GenreResponse, MovieError>) -> ())
 }
 
 enum MovieCategory: String {
