@@ -11,6 +11,7 @@ import RxCocoa
 
 class CategoriesView: UITableViewController {
     
+    var router = CategoriesRouter()
     var viewModel = CategoriesViewModel()
     var disposeBag = DisposeBag()
     var rc = UIRefreshControl()
@@ -26,6 +27,7 @@ class CategoriesView: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.bind(view: self, router: router)
         setupController()
         setupSearchController()
         getGenres()
@@ -35,6 +37,7 @@ class CategoriesView: UITableViewController {
         navigationItem.title = "Genres"
         rc.addTarget(self, action: #selector(getGenres), for: UIControl.Event.valueChanged)
         self.refreshControl = rc
+        self.clearsSelectionOnViewWillAppear = true
         self.tableView.separatorColor = .clear
         self.tableView.register(UINib(nibName: "CategoryViewCell", bundle: .main), forCellReuseIdentifier: CategoryViewCell.NAME)
     }

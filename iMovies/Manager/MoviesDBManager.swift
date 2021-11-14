@@ -9,9 +9,7 @@ import Foundation
 import RxSwift
 
 class MoviesDBManager: MoviesManagerProtocol {
-   
     
-   
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in
             var homeMovies = [HomeMovies]()
@@ -73,6 +71,21 @@ class MoviesDBManager: MoviesManagerProtocol {
                 switch result {
                 case .success(let response):
                     observer.onNext(response.genres)
+                case .failure(let error):
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create {}
+        }
+    }
+    
+    func getMoviesByGenre(id: Int) -> Observable<[Movie]> {
+        return Observable.create { observer in
+            TheMovieDBService.shared.fetchMovieByGener(id: id) { result in
+                switch result {
+                case .success(let response):
+                    observer.onNext(response.results)
                 case .failure(let error):
                     observer.onError(error)
                 }

@@ -21,5 +21,11 @@ class CategoriesRouter {
         guard let view = sourceView else { return }
         self.sourceView = view
     }
+    
+    func goToGenreMovies(genre: Genre) {
+        let moviesGenre = MoviesGenreRouter().viewController
+        moviesGenre.genre = genre
+        sourceView?.navigationController?.pushViewController(moviesGenre, animated: true)
+    }
 }
 

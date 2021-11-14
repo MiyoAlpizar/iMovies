@@ -14,6 +14,12 @@ class CategoriesViewModel {
     private var router: CategoriesRouter?
     public var moviesManager: MoviesManagerProtocol = MoviesDBManager()
     
+    func bind(view: CategoriesView, router: CategoriesRouter) {
+        self.view = view
+        self.router = router
+        self.router?.setSourceView(view)
+    }
+    
     func loadGenres() -> Observable<[Genre]>{
         return moviesManager.getGenres()
     }

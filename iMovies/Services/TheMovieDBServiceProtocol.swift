@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-import Foundation
+import RxSwift
 
 protocol TheMovieDBServiceProtocol {
     func fetchMovies(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
@@ -15,6 +14,7 @@ protocol TheMovieDBServiceProtocol {
     func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovieVideos(id: Int, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
     func fetchGenres(completion: @escaping(Result<GenreResponse, MovieError>) -> ())
+    func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
 }
 
 enum MovieCategory: String {

@@ -23,5 +23,9 @@ extension CategoriesView {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router.goToGenreMovies(genre: filteredGenres[indexPath.row])
+    }
+    
 }
 

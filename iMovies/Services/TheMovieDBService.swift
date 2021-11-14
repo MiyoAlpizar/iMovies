@@ -10,9 +10,7 @@ import Foundation
 import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
-    
-    
-    
+   
     static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
@@ -68,6 +66,23 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
         self.loadURLAndDecode(url: url, completion: completion)
     }
     
+    func fetchMovieByGener(id: Int, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/discover/movie") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url,
+                              params: [
+                                "language": Locale.current.languageCode ?? "en-US",
+                                "include_adult": "true",
+                                "with_genres": id.description
+                               ],
+                              completion: completion)
+    }
+}
+
+
+extension TheMovieDBService {
     
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping(Result<D, MovieError>) -> ()) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -85,7 +100,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
             completion(.failure(.invalidEndpoint))
             return
         }
-        
+        print(finalUrl)
         urlSession.dataTask(with: finalUrl) { [weak self] (data, response, error) in
             guard let self = self else { return }
             if let error = error {
@@ -122,4 +137,5 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
             completion(result)
         }
     }
+    
 }
