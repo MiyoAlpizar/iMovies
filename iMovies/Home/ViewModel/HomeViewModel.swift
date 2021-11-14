@@ -12,7 +12,7 @@ class HomeViewModel {
     
     private weak var view: HomeView?
     private var router: HomeRouter?
-    public var moviesManager: MoviesManagerProtocol = MoviesDBManager()
+    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: HomeView, router: HomeRouter) {
         self.view = view

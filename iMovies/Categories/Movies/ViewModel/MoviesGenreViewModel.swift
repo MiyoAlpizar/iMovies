@@ -12,7 +12,7 @@ class MoviesGenreViewModel {
     
     private weak var view: MoviesGenreView?
     private var router: MoviesGenreRouter?
-    public var moviesManager: MoviesManagerProtocol = MoviesDBManager()
+    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: MoviesGenreView, router: MoviesGenreRouter) {
         self.view = view

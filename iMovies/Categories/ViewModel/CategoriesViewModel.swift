@@ -12,7 +12,7 @@ class CategoriesViewModel {
     
     private weak var view: CategoriesView?
     private var router: CategoriesRouter?
-    public var moviesManager: MoviesManagerProtocol = MoviesDBManager()
+    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: CategoriesView, router: CategoriesRouter) {
         self.view = view
