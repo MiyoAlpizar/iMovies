@@ -9,17 +9,30 @@ import Foundation
 
 import Foundation
 
-class MovieService: MovieServiceProtocol {
-    static let shared = MovieService()
+class TheMovieDBService: TheMovieDBServiceProtocol {
+    
+    static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
     private let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
+    func getMovies(category: MovieCategory) async throws -> [Movie] {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
+            return []
+        }
+        do {
+            let movies: MovieResponse = try await APIService.fetch(from: url)
+            return movies.results
+        }catch {
+            return []
+        }
+        
+    }
     
-    func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
+    func fetchMovies(category: MovieCategory, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
             completion(.failure(.invalidEndpoint))
             return
         }

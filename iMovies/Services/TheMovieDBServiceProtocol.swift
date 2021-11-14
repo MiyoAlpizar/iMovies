@@ -9,15 +9,13 @@ import Foundation
 
 import Foundation
 
-protocol MovieServiceProtocol {
-    
-    func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
+protocol TheMovieDBServiceProtocol {
+    func fetchMovies(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
     func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
-    
 }
 
-enum MovieListEndpoint: String {
+enum MovieCategory: String {
     case nowPlaying = "now_playing"
     case upcoming
     case topRated = "top_rated"

@@ -16,8 +16,7 @@ class HomeRouter {
     private var sourceView: UIViewController?
     
     private func createViewController() -> UIViewController {
-        let view = HomeView(nibName: "HomeView", bundle: Bundle.main)
-        return view
+        return HomeView.instance()
     }
     
     func setSourceView(_ sourceView: UIViewController?) {
