@@ -10,11 +10,12 @@ import RxSwift
 
 class HomeView: UITableViewController {
     
-    private var router = HomeRouter()
+    var router = HomeRouter()
     private var viewModel = HomeViewModel()
     private var refreshControll = UIRefreshControl()
     var homeMovies = [HomeMovies]()
     private var disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

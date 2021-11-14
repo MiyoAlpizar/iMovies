@@ -14,6 +14,7 @@ class PostersViewCell: UITableViewCell {
     
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var cellDelegate: PosterViewCellProtocol?
     
     public var category: MovieCategory?
     {

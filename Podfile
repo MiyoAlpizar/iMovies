@@ -9,6 +9,7 @@ target 'iMovies' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SDWebImage'
+  pod 'youtube-ios-player-helper'
 
   target 'iMoviesTests' do
     inherit! :search_paths

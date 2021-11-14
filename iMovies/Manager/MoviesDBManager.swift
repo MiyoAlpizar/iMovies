@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 class MoviesDBManager: MoviesManagerProtocol {
+   
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in
             var homeMovies = [HomeMovies]()
@@ -28,8 +29,25 @@ class MoviesDBManager: MoviesManagerProtocol {
             }
             return Disposables.create {}
         }
-        
     }
+    
+    func getMovieVideos(id: Int) -> Observable<[MovieVideo]> {
+        return Observable.create { observer in
+            var moviewVides = [MovieVideo]()
+            TheMovieDBService.shared.fetchMovieVideos(id: id) { result in
+                switch result {
+                case .success(let videos):
+                    moviewVides = videos.results
+                    observer.onNext(moviewVides)
+                case .failure(let error):
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create {}
+        }
+    }
+    
     
     private func getMovies(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
         TheMovieDBService.shared.fetchMovies(category: category) { result in
@@ -46,4 +64,5 @@ class MoviesDBManager: MoviesManagerProtocol {
             }
         }
     }
+    
 }

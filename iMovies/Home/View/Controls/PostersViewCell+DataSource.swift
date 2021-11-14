@@ -22,4 +22,11 @@ extension PostersViewCell: UICollectionViewDataSource {
         cell.movie = movies[indexPath.row]
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let delegate = cellDelegate else {
+            return
+        }
+        delegate.onPosterPressed(movie: movies[indexPath.row])
+    }
 }

@@ -8,11 +8,13 @@ PODS:
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
+  - youtube-ios-player-helper (1.0.3)
 
 DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SDWebImage
+  - youtube-ios-player-helper
 
 SPEC REPOS:
   trunk:
@@ -20,13 +22,15 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SDWebImage
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
+  youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
 
-PODFILE CHECKSUM: 2a6e6f39f5ea0affacc963a80d723d1b3b4dd976
+PODFILE CHECKSUM: 1341a313a5bfafc85cef9bb5ff9b783148c10d27
 
 COCOAPODS: 1.11.2

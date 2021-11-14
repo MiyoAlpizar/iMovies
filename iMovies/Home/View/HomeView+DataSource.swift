@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension HomeView {
+extension HomeView: PosterViewCellProtocol {
     
     // MARK: - Table view data source
 
@@ -24,6 +24,7 @@ extension HomeView {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostersViewCell.NAME) as! PostersViewCell
         cell.category = homeMovies[indexPath.section].category
         cell.movies = homeMovies[indexPath.section].movies
+        cell.cellDelegate = self
         return cell
     }
     
@@ -32,6 +33,10 @@ extension HomeView {
             return Constants.Sizes.BigPoster.height
         }
         return Constants.Sizes.MediumPoster.height
+    }
+    
+    func onPosterPressed(movie: Movie) {
+        router.openDetail(movie: movie)
     }
     
 }

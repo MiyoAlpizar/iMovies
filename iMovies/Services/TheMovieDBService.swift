@@ -11,6 +11,8 @@ import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
     
+    
+    
     static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
@@ -18,18 +20,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
-    func getMovies(category: MovieCategory) async throws -> [Movie] {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
-            return []
-        }
-        do {
-            let movies: MovieResponse = try await APIService.fetch(from: url)
-            return movies.results
-        }catch {
-            return []
-        }
-        
-    }
+   
     
     func fetchMovies(category: MovieCategory, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
@@ -60,6 +51,15 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                                ],
                               completion: completion)
     }
+    
+    func fetchMovieVideos(id: Int, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/videos") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
+    }
+    
     
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping(Result<D, MovieError>) -> ()) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {

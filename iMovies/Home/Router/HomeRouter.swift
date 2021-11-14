@@ -23,4 +23,10 @@ class HomeRouter  {
         guard let view = sourceView else { return }
         self.sourceView = view
     }
+    
+    func openDetail(movie: Movie) {
+        let detailView = DetailRouter().viewController
+        detailView.movie = movie
+        sourceView?.present(detailView, animated: true, completion: nil)
+    }
 }
