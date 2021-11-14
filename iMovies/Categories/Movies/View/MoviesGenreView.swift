@@ -66,6 +66,7 @@ class MoviesGenreView: UICollectionViewController {
         collectionView.register(UINib(nibName: "MoviePosterCell", bundle: nil), forCellWithReuseIdentifier: MoviePosterCell.NAME)
         collectionView.collectionViewLayout = layout
         
+        
     }
     
 }

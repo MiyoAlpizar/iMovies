@@ -25,6 +25,7 @@ class CategoriesRouter {
     func goToGenreMovies(genre: Genre) {
         let moviesGenre = MoviesGenreRouter().viewController
         moviesGenre.genre = genre
+        moviesGenre.hidesBottomBarWhenPushed = true
         sourceView?.navigationController?.pushViewController(moviesGenre, animated: true)
     }
 }
