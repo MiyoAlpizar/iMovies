@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         window?.overrideUserInterfaceStyle = .dark
+        AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait)
         
     }
 

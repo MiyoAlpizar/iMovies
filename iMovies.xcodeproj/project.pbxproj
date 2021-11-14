@@ -29,6 +29,7 @@
 		6A85C427274191D700E38920 /* MoviesGenre+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C426274191D700E38920 /* MoviesGenre+DataSource.swift */; };
 		6A85C4292741920D00E38920 /* MoviesGenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C4282741920D00E38920 /* MoviesGenreViewModel.swift */; };
 		6A85C42B2741921B00E38920 /* MoviesGenreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C42A2741921B00E38920 /* MoviesGenreRouter.swift */; };
+		6A85C42E2741CA6C00E38920 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C42D2741CA6C00E38920 /* AppUtility.swift */; };
 		6A9D2D812740508C00A6E09A /* TheMovieDBServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D802740508C00A6E09A /* TheMovieDBServiceProtocol.swift */; };
 		6A9D2D83274050C100A6E09A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D82274050C100A6E09A /* Movie.swift */; };
 		6A9D2D852740512100A6E09A /* TheMovieDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D842740512100A6E09A /* TheMovieDBService.swift */; };
@@ -110,6 +111,7 @@
 		6A85C426274191D700E38920 /* MoviesGenre+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesGenre+DataSource.swift"; sourceTree = "<group>"; };
 		6A85C4282741920D00E38920 /* MoviesGenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGenreViewModel.swift; sourceTree = "<group>"; };
 		6A85C42A2741921B00E38920 /* MoviesGenreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGenreRouter.swift; sourceTree = "<group>"; };
+		6A85C42D2741CA6C00E38920 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		6A9D2D802740508C00A6E09A /* TheMovieDBServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBServiceProtocol.swift; sourceTree = "<group>"; };
 		6A9D2D82274050C100A6E09A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		6A9D2D842740512100A6E09A /* TheMovieDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBService.swift; sourceTree = "<group>"; };
@@ -372,6 +374,14 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		6A85C42C2741CA5D00E38920 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6A85C42D2741CA6C00E38920 /* AppUtility.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6A9D2D7F2740505A00A6E09A /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +394,7 @@
 		6A9D2D862740516F00A6E09A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A85C42C2741CA5D00E38920 /* Helpers */,
 				6A9D2DBF2740DE3700A6E09A /* Protocols */,
 				6A9D2D8D2740717B00A6E09A /* Extensions */,
 				6A9D2D872740518300A6E09A /* Utils.swift */,
@@ -846,6 +857,7 @@
 				6A9D2D962740903D00A6E09A /* HomeMovies.swift in Sources */,
 				6A81328D2741390500DB0CAD /* Genre.swift in Sources */,
 				6A9D2D9B2740A92400A6E09A /* MoviesDBManager.swift in Sources */,
+				6A85C42E2741CA6C00E38920 /* AppUtility.swift in Sources */,
 				6A9D2D9E2740AF9000A6E09A /* MoviePosterCell.swift in Sources */,
 				6A9D2DC92740E05A00A6E09A /* CategoriesRouter.swift in Sources */,
 				6A9D2DDF2740F13600A6E09A /* MovieVideo.swift in Sources */,
@@ -1029,9 +1041,10 @@
 				INFOPLIST_FILE = iMovies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1058,9 +1071,10 @@
 				INFOPLIST_FILE = iMovies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
