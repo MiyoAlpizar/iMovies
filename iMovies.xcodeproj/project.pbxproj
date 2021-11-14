@@ -32,6 +32,8 @@
 		6A85C42E2741CA6C00E38920 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C42D2741CA6C00E38920 /* AppUtility.swift */; };
 		6A85C4322741CC1E00E38920 /* SearchView+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C4312741CC1E00E38920 /* SearchView+DataSource.swift */; };
 		6A85C4342741CE8300E38920 /* MoviesManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C4332741CE8300E38920 /* MoviesManagerHelper.swift */; };
+		6A85C4362741CFDC00E38920 /* MoviesSQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C4352741CFDC00E38920 /* MoviesSQLiteManager.swift */; };
+		6A85C4382741D05F00E38920 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85C4372741D05F00E38920 /* Reachability.swift */; };
 		6A9D2D812740508C00A6E09A /* TheMovieDBServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D802740508C00A6E09A /* TheMovieDBServiceProtocol.swift */; };
 		6A9D2D83274050C100A6E09A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D82274050C100A6E09A /* Movie.swift */; };
 		6A9D2D852740512100A6E09A /* TheMovieDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2D842740512100A6E09A /* TheMovieDBService.swift */; };
@@ -116,6 +118,8 @@
 		6A85C42D2741CA6C00E38920 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		6A85C4312741CC1E00E38920 /* SearchView+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchView+DataSource.swift"; sourceTree = "<group>"; };
 		6A85C4332741CE8300E38920 /* MoviesManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManagerHelper.swift; sourceTree = "<group>"; };
+		6A85C4352741CFDC00E38920 /* MoviesSQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSQLiteManager.swift; sourceTree = "<group>"; };
+		6A85C4372741D05F00E38920 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		6A9D2D802740508C00A6E09A /* TheMovieDBServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBServiceProtocol.swift; sourceTree = "<group>"; };
 		6A9D2D82274050C100A6E09A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		6A9D2D842740512100A6E09A /* TheMovieDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBService.swift; sourceTree = "<group>"; };
@@ -382,7 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				6A85C42D2741CA6C00E38920 /* AppUtility.swift */,
-				6A85C4332741CE8300E38920 /* MoviesManagerHelper.swift */,
+				6A85C4372741D05F00E38920 /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -435,6 +439,8 @@
 			children = (
 				6A9D2D982740A8FA00A6E09A /* MoviesManagerProtocol.swift */,
 				6A9D2D9A2740A92400A6E09A /* MoviesDBManager.swift */,
+				6A85C4352741CFDC00E38920 /* MoviesSQLiteManager.swift */,
+				6A85C4332741CE8300E38920 /* MoviesManagerHelper.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -522,8 +528,8 @@
 			isa = PBXGroup;
 			children = (
 				6A9D2DCC2740E0B700A6E09A /* SearchView.swift */,
-				6A9D2DCD2740E0B700A6E09A /* SearchView.xib */,
 				6A85C4312741CC1E00E38920 /* SearchView+DataSource.swift */,
+				6A9D2DCD2740E0B700A6E09A /* SearchView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -854,6 +860,7 @@
 				6A9D2DB22740D07B00A6E09A /* HomeView+DataSource.swift in Sources */,
 				6A9D2DDC2740EF9600A6E09A /* DetailRouter.swift in Sources */,
 				6A9D2DCE2740E0B700A6E09A /* SearchView.swift in Sources */,
+				6A85C4362741CFDC00E38920 /* MoviesSQLiteManager.swift in Sources */,
 				6A85C4242741917000E38920 /* MoviesGenreView.swift in Sources */,
 				6A9D2DB02740D04100A6E09A /* PostersViewCell+DataSource.swift in Sources */,
 				6A9D2DD62740E7E700A6E09A /* DetailView.swift in Sources */,
@@ -864,6 +871,7 @@
 				6A85C427274191D700E38920 /* MoviesGenre+DataSource.swift in Sources */,
 				6A9D2DC42740E03B00A6E09A /* CategoriesView.swift in Sources */,
 				6A9D2DE22740F3B100A6E09A /* DetailViewModel.swift in Sources */,
+				6A85C4382741D05F00E38920 /* Reachability.swift in Sources */,
 				6A9D2D812740508C00A6E09A /* TheMovieDBServiceProtocol.swift in Sources */,
 				6A9D2DE52740F66200A6E09A /* PosterViewCellProtocol.swift in Sources */,
 				6A9D2D8C2740715700A6E09A /* UIViewController+Extensions.swift in Sources */,

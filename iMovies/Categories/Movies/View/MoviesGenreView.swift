@@ -17,11 +17,7 @@ class MoviesGenreView: UICollectionViewController {
     private var rc = UIRefreshControl()
     var movies = [Movie]()
     private var disposeBag = DisposeBag()
-    var genre: Genre? {
-        didSet {
-            loadMovies()
-        }
-    }
+    var genre: Genre? 
     
     override func viewDidLoad() {
         super.viewDidLoad()
