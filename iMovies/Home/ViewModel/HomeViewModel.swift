@@ -20,7 +20,7 @@ class HomeViewModel {
         self.router?.setSourceView(view)
     }
     
-    func getHomePosters(type: showType) -> Observable<[Poster]> {
+    func getHomePosters(type: ShowType) -> Observable<[Poster]> {
         return moviesManager.getHomePosters(type: type)
     }
     

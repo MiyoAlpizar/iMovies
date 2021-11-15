@@ -45,7 +45,7 @@ class DetailView: UIViewController {
         loadVideos(id: showInfo.id, type: showInfo.type)
     }
     
-    private func loadVideos(id: Int, type: showType) {
+    private func loadVideos(id: Int, type: ShowType) {
         viewModel.loadVideos(id: id, type: type)
             .subscribe(on: 	MainScheduler.instance)
             .observe(on: MainScheduler.instance)

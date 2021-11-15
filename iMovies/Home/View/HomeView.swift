@@ -18,7 +18,7 @@ class HomeView: UITableViewController {
     
     private var disposeBag = DisposeBag()
     private var segmentedType = UISegmentedControl(items: ["Movies", "Series"])
-    var type: showType = .movie
+    var type: ShowType = .movie
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import RxSwift
 
 /// Protocol to fecth movies info
 protocol MoviesManagerProtocol {
-    func getVideos(type: showType, id: Int) -> Observable<[MovieVideo]>
+    func getVideos(type: ShowType, id: Int) -> Observable<[MovieVideo]>
     func getGenres() -> Observable<[Genre]>
     func getMoviesByGenre(id:Int) -> Observable<[Movie]>
     func getMoviesByCategory(catgeory:MovieCategory) -> Observable<[Movie]>
@@ -20,7 +20,7 @@ protocol MoviesManagerProtocol {
     func getSeriesByCategory(catgeory:MovieCategory) -> Observable<[Serie]>
     func filterSeries(text:String) -> Observable<[Serie]>
     
-    func getHomePosters(type: showType) -> Observable<[Poster]>
+    func getHomePosters(type: ShowType) -> Observable<[Poster]>
     
 }
 

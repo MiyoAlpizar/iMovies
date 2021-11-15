@@ -10,10 +10,9 @@ import RxSwift
 
 ///Protocol to get movies info from  https://www.themoviedb.org
 protocol TheMovieDBServiceProtocol {
-    func fetchMovies(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
     func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
-    func fetchVideos(id: Int, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
+    func fetchVideos(id: Int, type: ShowType, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
     func fetchGenres(completion: @escaping(Result<GenreResponse, MovieError>) -> ())
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
     

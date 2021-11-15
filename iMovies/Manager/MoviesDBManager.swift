@@ -11,7 +11,9 @@ import RxSwift
 ///Fetches movies from https://www.themoviedb.org
 class MoviesDBManager: MoviesManagerProtocol {
     
-    func getHomePosters(type: showType) -> Observable<[Poster]> {
+    let service = TheMovieDBService.shared
+    
+    func getHomePosters(type: ShowType) -> Observable<[Poster]> {
         return Observable.create { observer in
             switch type {
             case .movie:
@@ -30,13 +32,10 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    
-   
-    
-    func getVideos(type: showType,id: Int) -> Observable<[MovieVideo]> {
+    func getVideos(type: ShowType,id: Int) -> Observable<[MovieVideo]> {
         return Observable.create { observer in
             var moviewVides = [MovieVideo]()
-            self.getVideos(type: type, id: id) { result in
+            self.service.fetchVideos(id: id, type: type) { result in
                 switch result {
                 case .success(let videos):
                     moviewVides = videos.results
@@ -50,12 +49,9 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    
-    
-    
     func getGenres() -> Observable<[Genre]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.fetchGenres { result in
+            self.service.fetchGenres { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.genres)
@@ -70,7 +66,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func getMoviesByGenre(id: Int) -> Observable<[Movie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.fetchMovieByGener(id: id) { result in
+            self.service.fetchMovieByGener(id: id) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -85,7 +81,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.fetchMovies(category: catgeory) { result in
+            self.service.fetchMovies(category: catgeory) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -100,7 +96,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func filterMovies(text: String) -> Observable<[Movie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.seacrhMovie(query: text) { result in
+            self.service.seacrhMovie(query: text) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -113,11 +109,9 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    
-    
     func getSeriesByGenre(id: Int) -> Observable<[Serie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.fetchSeriesByGener(id: id) { result in
+            self.service.fetchSeriesByGener(id: id) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -132,7 +126,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func getSeriesByCategory(catgeory: MovieCategory) -> Observable<[Serie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.fetchSeries(category: catgeory) { result in
+            self.service.fetchSeries(category: catgeory) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -147,7 +141,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func filterSeries(text: String) -> Observable<[Serie]> {
         return Observable.create { observer in
-            TheMovieDBService.shared.seacrhSeries(query: text) { result in
+            self.service.seacrhSeries(query: text) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -162,14 +156,9 @@ class MoviesDBManager: MoviesManagerProtocol {
     
 }
 
+
+//MARK:- API Calls
 extension MoviesDBManager {
-    
-    private func getVideos(type: showType, id: Int, completion:@escaping(Result<MovieVideoResult, MovieError>) -> ()) {
-        guard let url = URL(string: "\(APIService.shared.baseAPIURL)/\(type.rawValue)/\(id)/videos") else {
-            return
-        }
-        APIService.shared.loadURLAndDecode(url: url, completion: completion)
-    }
     
     private func getHomeMovies(completion: @escaping(_ posters:[Poster]) -> ()) {
         var posters = [Poster]()
@@ -189,7 +178,7 @@ extension MoviesDBManager {
     }
     
     private func getMovieByCategory(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
-        getMoviesByCategory(category: category) { result in
+        self.service.fetchMovies(category: category) { result in
             switch result {
             case .success(let movie):
                 completion(movie.results)
@@ -197,15 +186,6 @@ extension MoviesDBManager {
                 completion([])
             }
         }
-    }
-    
-    
-    private func getMoviesByCategory(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ()) {
-        guard let url = URL(string: "\(APIService.shared.baseAPIURL)/movie/\(category.rawValue)") else {
-            return
-        }
-        APIService.shared.loadURLAndDecode(url: url, completion: completion)
-        
     }
     
     private func getHomeSeries(completion: @escaping(_ posters:[Poster]) -> ()) {
@@ -226,7 +206,7 @@ extension MoviesDBManager {
     }
     
     private func getSerieByCategory(category: MovieCategory, completion: @escaping(_ series: [Serie]) -> ()) {
-        getSeriesByCategory(category: category) { result in
+        self.service.fetchSeries(category: category) { result in
             switch result {
             case .success(let serie):
                 completion(serie.results)
@@ -236,17 +216,8 @@ extension MoviesDBManager {
         }
     }
     
-    
-    private func getSeriesByCategory(category: MovieCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ()) {
-        guard let url = URL(string: "\(APIService.shared.baseAPIURL)/tv/\(category.rawValue)") else {
-            return
-        }
-        APIService.shared.loadURLAndDecode(url: url, completion: completion)
-    }
-    
-    
     private func getSeries(category: MovieCategory, completion: @escaping(_ movies: [Serie]) -> ()) {
-        TheMovieDBService.shared.fetchSeries(category: category) { result in
+        service.fetchSeries(category: category) { result in
             switch result {
             case .success(let response):
                 if response.results.count > 0 {
@@ -262,7 +233,7 @@ extension MoviesDBManager {
     }
     
     private func getMovies(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
-        TheMovieDBService.shared.fetchMovies(category: category) { result in
+        service.fetchMovies(category: category) { result in
             switch result {
             case .success(let response):
                 if response.results.count > 0 {
@@ -275,6 +246,31 @@ extension MoviesDBManager {
                 completion([])
             }
         }
+    }
+}
+
+
+//MARK:- CASTS
+extension MoviesDBManager {
+    
+    func castMoviesToShowInfo(movies: [Movie]) -> [ShowInfo]{
+        var showsInfo = [ShowInfo]()
+        for item in movies {
+            if (item.posterPath != nil && item.backdropPath != nil) {
+                showsInfo.append(item.toShowInfo())
+            }
+        }
+        return showsInfo
+    }
+    
+    func castSeriesToShowInfo(series: [Serie]) -> [ShowInfo] {
+        var showsInfo = [ShowInfo]()
+        for item in series {
+            if (item.posterPath != nil && item.backdropPath != nil) {
+                showsInfo.append(item.toShowInfo())
+            }
+        }
+        return showsInfo
     }
 }
 

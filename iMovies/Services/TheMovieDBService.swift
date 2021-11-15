@@ -50,8 +50,8 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                               completion: completion)
     }
     
-    func fetchVideos(id: Int, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/videos") else {
+    func fetchVideos(id: Int, type: ShowType, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/\(type.rawValue)/\(id)/videos") else {
             completion(.failure(.invalidEndpoint))
             return
         }

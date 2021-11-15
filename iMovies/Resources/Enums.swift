@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum showType : String {
+enum ShowType : String {
     case movie
     case serie = "tv"
 }

@@ -13,7 +13,7 @@ struct ShowInfo: Equatable {
     let landscapePoster: URL?
     let name: String
     let overview: String
-    let type: showType
+    let type: ShowType
     let voteAverage: Double
     let voteCount: Int
     let date: String?
