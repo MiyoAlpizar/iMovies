@@ -23,4 +23,8 @@ class MoviesGenreViewModel {
     func loadMoviesByGenre(id: Int) -> Observable<[Movie]>{
         return moviesManager.getMoviesByGenre(id: id)
     }
+    
+    func searchMovies(text: String) -> Observable<[Movie]>{
+        return moviesManager.filterMovies(text: text)
+    }
 }

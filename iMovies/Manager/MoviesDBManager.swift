@@ -96,4 +96,34 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
+    func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
+        return Observable.create { observer in
+            TheMovieDBService.shared.fetchMovies(category: catgeory) { result in
+                switch result {
+                case .success(let response):
+                    observer.onNext(response.results)
+                case .failure(let error):
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create {}
+        }
+    }
+    
+    func filterMovies(text: String) -> Observable<[Movie]> {
+        return Observable.create { observer in
+            TheMovieDBService.shared.seacrhMovie(query: text) { result in
+                switch result {
+                case .success(let response):
+                    observer.onNext(response.results)
+                case .failure(let error):
+                    observer.onError(error)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create {}
+        }
+    }
+    
 }

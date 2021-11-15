@@ -14,4 +14,11 @@ extension UIViewController {
         let id = String(describing: self)
         return Self(nibName: id, bundle: Bundle.main)
     }
+    
+    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
+    }
+    
 }

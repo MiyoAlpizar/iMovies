@@ -27,7 +27,7 @@ class MoviesManagerHelper: ReachabilityObserverDelegate {
     func reachabilityChanged(_ isReachable: Bool) {
         //if lost connection, will fetch movies from local data base persisted (offline)
         if !isReachable {
-            manager = MoviesSQLiteManager()
+            manager = MoviesLocalDBManager()
         }else {
             manager = MoviesDBManager()
         }

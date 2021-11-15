@@ -9,7 +9,8 @@ import RxSwift
 
 
 ///Fetches movies from local data base in order to keep alive offline
-class MoviesSQLiteManager: MoviesManagerProtocol {
+class MoviesLocalDBManager: MoviesManagerProtocol {
+    
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in
             observer.onNext([])
@@ -37,6 +38,22 @@ class MoviesSQLiteManager: MoviesManagerProtocol {
     func getMoviesByGenre(id: Int) -> Observable<[Movie]> {
         return Observable.create { observer in
             print("Getting movies from local data base")
+            observer.onNext([])
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
+    func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
+        return Observable.create { observer in
+            observer.onNext([])
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
+    func filterMovies(text: String) -> Observable<[Movie]> {
+        return Observable.create { observer in
             observer.onNext([])
             observer.onCompleted()
             return Disposables.create {}

@@ -14,4 +14,6 @@ protocol MoviesManagerProtocol {
     func getMovieVideos(id: Int) -> Observable<[MovieVideo]>
     func getGenres() -> Observable<[Genre]>
     func getMoviesByGenre(id:Int) -> Observable<[Movie]>
+    func getMoviesByCategory(catgeory:MovieCategory) -> Observable<[Movie]>
+    func filterMovies(text:String) -> Observable<[Movie]>
 }

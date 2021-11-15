@@ -42,6 +42,18 @@ class MoviesGenreView: UICollectionViewController {
             }.disposed(by: disposeBag)
     }
     
+    public func filterMovies(text: String) {
+        viewModel.searchMovies(text: text)
+            .subscribe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
+            .subscribe { movies in
+                self.movies = movies
+                self.reloadCollectionView()
+            } onError: { error in
+                print(error.localizedDescription)
+            }.disposed(by: disposeBag)
+    }
+    
     func reloadCollectionView() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
