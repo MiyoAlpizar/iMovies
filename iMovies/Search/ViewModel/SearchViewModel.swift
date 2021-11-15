@@ -19,7 +19,7 @@ class SearchViewModel {
         self.router?.setSourceView(view)
     }
     
-    func loadMovies() -> Observable<[Movie]>{
-        return moviesManager.getMoviesByCategory(catgeory: ShowCategory.popular)
+    func loadShows(type: ShowType) -> Observable<[ShowInfo]>{
+        return moviesManager.getShowsByCategory(type: type, category: ShowCategory.topRated)
     }
 }

@@ -14,15 +14,15 @@ class PlayMovieCell: UITableViewCell {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
-    var movie: Movie? {
+    var showInfo: ShowInfo? {
         didSet {
-            guard let movie = movie else {
+            guard let showInfo = showInfo else {
                 return
             }
-            if movie.backdropPath != nil {
-                posterImage.sd_setImage(with: movie.backdropURL, completed: nil)
+            if showInfo.landscapePoster != nil {
+                posterImage.sd_setImage(with: showInfo.landscapePoster!, completed: nil)
             }
-            titleLbl.text = movie.title
+            titleLbl.text = showInfo.name
             
         }
     }

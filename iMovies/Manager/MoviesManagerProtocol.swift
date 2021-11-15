@@ -15,7 +15,7 @@ protocol MoviesManagerProtocol {
     func getSeriesByCategory(catgeory:ShowCategory) -> Observable<[Serie]>
     func getGenres(type: ShowType) -> Observable<[Genre]>
     func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]>
-    func getShowsByCategory(type: ShowType, category: ShowCategory) -> [ShowInfo]
+    func getShowsByCategory(type: ShowType, category: ShowCategory) -> Observable<[ShowInfo]>
     
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]>

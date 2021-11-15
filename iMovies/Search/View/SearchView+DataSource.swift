@@ -15,17 +15,17 @@ extension SearchView {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredMovies.count
+        return showsInfo.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayMovieCell.NAME, for: indexPath) as! PlayMovieCell
-        cell.movie = filteredMovies[indexPath.row]
+        cell.showInfo = showsInfo[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //router.openDetail(movie: filteredMovies[indexPath.row])
+        router.openDetail(showInfo: showsInfo[indexPath.row])
         delayWithSeconds(0.3) {
             tableView.deselectRow(at: indexPath, animated: true)
         }

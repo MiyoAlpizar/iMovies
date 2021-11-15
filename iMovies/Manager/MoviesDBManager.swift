@@ -12,7 +12,6 @@ import RxSwift
 class MoviesDBManager: MoviesManagerProtocol {
     
     
-    
     let service = TheMovieDBService.shared
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]> {
@@ -84,8 +83,6 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    
-    
     func getMoviesByCategory(catgeory: ShowCategory) -> Observable<[Movie]> {
         return Observable.create { observer in
             self.service.fetchMovies(category: catgeory) { result in
@@ -100,8 +97,6 @@ class MoviesDBManager: MoviesManagerProtocol {
             return Disposables.create {}
         }
     }
-    
-    
     
     func filterMovies(text: String) -> Observable<[Movie]> {
         return Observable.create { observer in
@@ -160,6 +155,28 @@ class MoviesDBManager: MoviesManagerProtocol {
                 observer.onCompleted()
             }
             return Disposables.create {}
+        }
+    }
+    
+    func getShowsByCategory(type: ShowType, category: ShowCategory) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            
+            switch type {
+            case .movie:
+                self.getMovieByCategory(category: category) { movies in
+                    observer.onNext(self.castMoviesToShowInfo(movies: movies))
+                    observer.onCompleted()
+                }
+            case .serie:
+                self.getSerieByCategory(category: category) { series in
+                    observer.onNext(self.castSeriesToShowInfo(series: series))
+                    observer.onCompleted()
+                }
+            }
+            
+            return Disposables.create {
+                
+            }
         }
     }
     

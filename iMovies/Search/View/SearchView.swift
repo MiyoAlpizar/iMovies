@@ -14,8 +14,7 @@ class SearchView: UITableViewController {
     var router = SearchRouter()
     var viewModel = SearchViewModel()
     var disposeBag = DisposeBag()
-    var movies = [Movie]()
-    var filteredMovies = [Movie]()
+    var showsInfo = [ShowInfo]()
     
     let searchController = UISearchController(searchResultsController: ShowsView.instance())
     private var segmentedType = UISegmentedControl(items: Constants.Common.ShowTypes)
@@ -27,16 +26,15 @@ class SearchView: UITableViewController {
         setupSearchController()
         setupSegmentedControll()
         viewModel.bind(view: self, router: router)
-        loadMovies()
+        loadShows()
     }
     
-    private func loadMovies() {
-        viewModel.loadMovies()
+    private func loadShows() {
+        viewModel.loadShows(type: showType)
             .observe(on: MainScheduler.instance)
             .subscribe(on: MainScheduler.instance)
-            .subscribe { movies in
-                self.movies = movies
-                self.filteredMovies = movies
+            .subscribe { shows in
+                self.showsInfo = shows
                 self.reloadTableView()
             } onError: { error in
                 print(error.localizedDescription)
@@ -53,6 +51,7 @@ class SearchView: UITableViewController {
     private func setupSearchController() {
         navigationItem.searchController = searchController
         searchController.delegate = self
+        searchController.searchBar.placeholder = "Search in movies"
         searchController.searchBar.rx.text
             .orEmpty
             .distinctUntilChanged()
@@ -79,7 +78,8 @@ class SearchView: UITableViewController {
             .changed
             .subscribe { index in
                 self.showType = index.element == 0 ? .movie : .serie
-                self.getGenres()
+                self.searchController.searchBar.placeholder = "Search in \(self.showType.description.lowercased())"
+                self.loadShows()
             }.disposed(by: disposeBag)
     }
     
