@@ -13,18 +13,13 @@ class MoviePosterCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImage: UIImageView!
     
-    public var movie: Movie? {
+   
+    public var posterPath: URL? {
         didSet {
-            guard let movie = movie else {
+            guard let url =  posterPath else {
                 return
             }
-            guard movie.posterPath != nil else {
-                return
-            }
-            guard posterImage != nil else {
-                return
-            }
-            posterImage.sd_setImage(with: movie.posterURL, completed: nil)
+            posterImage.sd_setImage(with: url, completed: nil)
         }
     }
     

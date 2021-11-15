@@ -10,7 +10,7 @@ import Foundation
 import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
-   
+    
     static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
@@ -50,7 +50,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                               completion: completion)
     }
     
-    func fetchMovieVideos(id: Int, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
+    func fetchVideos(id: Int, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/videos") else {
             completion(.failure(.invalidEndpoint))
             return
@@ -79,6 +79,51 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                                ],
                               completion: completion)
     }
+    
+    func fetchSeries(category: MovieCategory, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/tv/\(category.rawValue)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
+    }
+    
+    func fetchSerie(id: Int, completion: @escaping (Result<Serie, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/tv/\(id)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, params: ["append_to_response": "videos,credits"] ,completion: completion)
+    }
+    
+    func seacrhSeries(query: String, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/search/tv") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url,
+                              params: [
+                                "language": Locale.current.languageCode ?? "en-US",
+                                "include_adult": "true",
+                                "query": query
+                               ],
+                              completion: completion)
+    }
+    
+    func fetchSeriesByGener(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/discover/tv") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url,
+                              params: [
+                                "language": Locale.current.languageCode ?? "en-US",
+                                "include_adult": "true",
+                                "with_genres": id.description
+                               ],
+                              completion: completion)
+    }
+    
 }
 
 

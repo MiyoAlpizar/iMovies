@@ -24,7 +24,7 @@ class PostersViewCell: UITableViewCell {
             }
         }
     }
-    public var movies = [Movie]()
+    public var showInfo = [ShowInfo]()
     {
         didSet {
             DispatchQueue.main.async {

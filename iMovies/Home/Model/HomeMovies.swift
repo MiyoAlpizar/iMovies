@@ -11,3 +11,8 @@ struct HomeMovies {
     let category: MovieCategory
     var movies: [Movie]
 }
+
+struct HomeSeries {
+    let category: MovieCategory
+    var series: [Serie]
+}

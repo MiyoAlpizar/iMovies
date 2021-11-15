@@ -13,15 +13,18 @@ class HomeView: UITableViewController {
     var router = HomeRouter()
     private var viewModel = HomeViewModel()
     private var rc = UIRefreshControl()
-    var homeMovies = [HomeMovies]()
-    private var disposeBag = DisposeBag()
+    var posters = [Poster]()
     
+    private var disposeBag = DisposeBag()
+    private var segmentedType = UISegmentedControl(items: ["Movies", "Series"])
+    var type: showType = .movie
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.bind(view: self, router: router)
         setupTableViewController()
-        loadMovies()
+        setupSegmentedControll()
+        loadHomePosters()
     }
     
     private func setupTableViewController() {
@@ -29,17 +32,27 @@ class HomeView: UITableViewController {
         tableView.separatorColor = .clear
         tableView.alwaysBounceVertical = true
         tableView.register(UINib(nibName: "PostersViewCell", bundle: Bundle.main), forCellReuseIdentifier: PostersViewCell.NAME)
-        rc.addTarget(self, action: #selector(loadMovies), for: UIControl.Event.valueChanged)
+        rc.addTarget(self, action: #selector(loadHomePosters), for: UIControl.Event.valueChanged)
         self.refreshControl = rc
-        
+    }
+    
+    private func setupSegmentedControll() {
+        navigationItem.titleView = segmentedType
+        segmentedType.selectedSegmentIndex = 0
+        segmentedType.rx.selectedSegmentIndex
+            .changed
+            .subscribe { index in
+                self.type = index.element == 0 ? .movie : .serie
+                self.loadHomePosters()
+            }.disposed(by: disposeBag)
     }
 
-    @objc private func loadMovies() {
-        viewModel.getHomeMovies()
+    @objc private func loadHomePosters() {
+        viewModel.getHomePosters(type: self.type)
             .subscribe(on: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
-            .subscribe { homeMovies in
-                self.homeMovies = homeMovies
+            .subscribe { posters in
+                self.posters = posters
                 self.reloadTableView()
             } onError: { error in
                 print(error.localizedDescription)
@@ -48,10 +61,13 @@ class HomeView: UITableViewController {
             }.disposed(by: disposeBag)
     }
     
+    
     private func reloadTableView() {
         DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+            UIView.animate(withDuration: 0.3) {
+                self.tableView.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
         }
     }
 }

@@ -53,6 +53,7 @@ class SearchView: UITableViewController {
         searchController.searchBar.rx.text
             .orEmpty
             .distinctUntilChanged()
+            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe { filterText in
                 guard let vc = self.searchController.searchResultsController as? MoviesGenreView else {
                     return

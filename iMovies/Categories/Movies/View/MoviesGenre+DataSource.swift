@@ -20,7 +20,7 @@ extension MoviesGenreView {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviePosterCell.NAME, for: indexPath) as! MoviePosterCell
-        cell.movie = movies[indexPath.row]
+        cell.posterPath = movies[indexPath.row].posterURL
         return cell
     }
     

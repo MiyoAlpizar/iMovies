@@ -14,12 +14,12 @@ extension PostersViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return showInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviePosterCell.NAME, for: indexPath) as! MoviePosterCell
-        cell.movie = movies[indexPath.row]
+        cell.posterPath = showInfo[indexPath.row].landscapePoster
         return cell
     }
     
@@ -27,6 +27,6 @@ extension PostersViewCell: UICollectionViewDataSource {
         guard let delegate = cellDelegate else {
             return
         }
-        delegate.onPosterPressed(movie: movies[indexPath.row])
+        //delegate.onPosterPressed(movie: movies[indexPath.row])
     }
 }

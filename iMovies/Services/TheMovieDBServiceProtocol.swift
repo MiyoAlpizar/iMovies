@@ -13,9 +13,14 @@ protocol TheMovieDBServiceProtocol {
     func fetchMovies(category: MovieCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
     func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
-    func fetchMovieVideos(id: Int, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
+    func fetchVideos(id: Int, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
     func fetchGenres(completion: @escaping(Result<GenreResponse, MovieError>) -> ())
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
+    
+    func fetchSeries(category: MovieCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
+    func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
+    func seacrhSeries(query: String, completion: @escaping(Result<SerieResults, MovieError>) -> ())
+    func fetchSeriesByGener(id: Int, completion: @escaping(Result<SerieResults, MovieError>) ->())
 }
 
 enum MovieCategory: String {
@@ -24,6 +29,8 @@ enum MovieCategory: String {
     case topRated = "top_rated"
     case popular
     case latest
+    case airingToday = "airing_today"
+    case onTheAir = "on_the_air"
     var description: String {
         switch self {
         case .nowPlaying:
@@ -36,6 +43,10 @@ enum MovieCategory: String {
             return NSLocalizedString("Popular", comment: "")
         case .latest:
             return NSLocalizedString("Latest", comment: "")
+        case .airingToday:
+            return NSLocalizedString("Aring Today", comment: "")
+        case .onTheAir:
+            return NSLocalizedString("On The Air", comment: "")
         }
     }
 }

@@ -15,7 +15,7 @@ class DetailViewModel {
     public var moviesManager = MoviesManagerHelper.shared.manager
     
     func loadVideos(id: Int) -> Observable<[MovieVideo]> {
-        return moviesManager.getMovieVideos(id: id)
+        return moviesManager.getVideos(id: id)
     }
     
 }
