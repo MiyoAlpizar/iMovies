@@ -15,6 +15,7 @@ class PostersViewCell: UITableViewCell {
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     weak var cellDelegate: PosterViewCellProtocol?
+    private var oldShowInfo = [ShowInfo]()
     
     public var category: MovieCategory?
     {
@@ -28,7 +29,9 @@ class PostersViewCell: UITableViewCell {
     {
         didSet {
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                
+                self.collectionView.reloadChanges(from: self.oldShowInfo, to: self.showInfo)
+                self.oldShowInfo = self.showInfo
             }
         }
     }

@@ -7,16 +7,19 @@
 
 import Foundation
 
-struct ShowInfo {
+struct ShowInfo: Equatable {
     let id: Int
     let portraitPoster: URL?
     let landscapePoster: URL?
     let name: String
     let overview: String
     let type: showType
+    let voteAverage: Double
+    let voteCount: Int
+    let date: String?
 }
 
-struct Poster {
+struct Poster: Equatable {
     let category: MovieCategory
     var posters: [ShowInfo]
 }

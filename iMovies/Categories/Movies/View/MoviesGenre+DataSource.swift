@@ -25,7 +25,7 @@ extension MoviesGenreView {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        router.openDetail(movie: movies[indexPath.row])
+        //router.openDetail(movie: movies[indexPath.row])
     }
     
     

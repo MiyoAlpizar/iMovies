@@ -30,11 +30,11 @@ extension MoviesDBManager {
     }
     
     func castMovieToShowInfo(movie: Movie) -> ShowInfo {
-        return ShowInfo(id: movie.id, portraitPoster: movie.posterURL, landscapePoster: movie.backdropURL, name: movie.title, overview: movie.overview, type: showType.movie)
+        return ShowInfo(id: movie.id, portraitPoster: movie.posterURL, landscapePoster: movie.backdropURL, name: movie.title, overview: movie.overview, type: showType.movie, voteAverage: movie.voteAverage, voteCount: movie.voteCount, date: movie.releaseDate)
     }
     
     func castSerieToShowInfo(serie: Serie) -> ShowInfo {
-        return ShowInfo(id: serie.id, portraitPoster: serie.posterURL, landscapePoster: serie.backdropURL, name: serie.name, overview: serie.overview, type: showType.movie)
+        return ShowInfo(id: serie.id, portraitPoster: serie.posterURL, landscapePoster: serie.backdropURL, name: serie.name, overview: serie.overview, type: showType.serie, voteAverage: serie.voteAverage, voteCount: serie.voteCount, date: serie.firstAirDate)
     }
     
 }

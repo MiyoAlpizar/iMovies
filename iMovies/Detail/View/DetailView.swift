@@ -25,24 +25,24 @@ class DetailView: UIViewController {
     
     var viewModel: DetailViewModel = DetailViewModel()
     
-    public var movie: Movie?
+    public var showInfo: ShowInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         videoPlayerView.isHidden = true
-        if let movie = movie {
-            setData(movie: movie)
+        if let showInfo = showInfo {
+            setData(showInfo: showInfo)
         }
     }
     
-    private func setData(movie: Movie) {
-        posterImg.sd_setImage(with: movie.backdropURL, completed: nil)
-        movieImage.sd_setImage(with: movie.posterURL, completed: nil)
-        movieInfo.text = "R - \(movie.releaseDate ?? "")"
-        movieTitle.text = movie.title
-        movieVotes.text = "\(movie.voteAverage)%"
-        moviewOverView.text = movie.overview
-        loadVideos(id: movie.id)
+    private func setData(showInfo: ShowInfo) {
+        posterImg.sd_setImage(with: showInfo.landscapePoster!, completed: nil)
+        movieImage.sd_setImage(with: showInfo.portraitPoster!, completed: nil)
+        movieInfo.text = "R - \(showInfo.date ?? "No date")"
+        movieTitle.text = showInfo.name
+        movieVotes.text = "\(showInfo.voteAverage)%"
+        moviewOverView.text = showInfo.overview
+        loadVideos(id: showInfo.id)
     }
     
     private func loadVideos(id: Int) {

@@ -23,9 +23,9 @@ class SearchRouter {
         self.sourceView = view
     }
     
-    func openDetail(movie: Movie) {
+    func openDetail(showInfo: ShowInfo) {
         let detailView = DetailRouter().viewController
-        detailView.movie = movie
+        detailView.showInfo = showInfo
         sourceView?.present(detailView, animated: true, completion: nil)
     }
 }

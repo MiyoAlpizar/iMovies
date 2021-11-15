@@ -27,6 +27,6 @@ extension PostersViewCell: UICollectionViewDataSource {
         guard let delegate = cellDelegate else {
             return
         }
-        //delegate.onPosterPressed(movie: movies[indexPath.row])
+        delegate.onPosterPressed(showInfo: showInfo[indexPath.row])
     }
 }

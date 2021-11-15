@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PosterViewCellProtocol: AnyObject {
-    func onPosterPressed(movie: Movie)
+    func onPosterPressed(showInfo: ShowInfo)
 }

@@ -1,4 +1,5 @@
 PODS:
+  - Differ (1.4.5)
   - ReachabilitySwift (5.0.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
@@ -12,6 +13,7 @@ PODS:
   - youtube-ios-player-helper (1.0.3)
 
 DEPENDENCIES:
+  - Differ
   - ReachabilitySwift
   - RxCocoa
   - RxSwift
@@ -20,6 +22,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Differ
     - ReachabilitySwift
     - RxCocoa
     - RxRelay
@@ -28,6 +31,7 @@ SPEC REPOS:
     - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
+  Differ: 3b6bd78e2b20cc795d9a86f7641d087524e4273e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
@@ -35,6 +39,6 @@ SPEC CHECKSUMS:
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
 
-PODFILE CHECKSUM: 2868737adbdf61f2c486157e3187c612927203dd
+PODFILE CHECKSUM: 36e81d3be03bbfacd6bcf9d0ec248699ef071674
 
 COCOAPODS: 1.11.2

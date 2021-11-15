@@ -35,8 +35,8 @@ extension HomeView: PosterViewCellProtocol {
         return Constants.Sizes.MediumPoster.height
     }
     
-    func onPosterPressed(movie: Movie) {
-        router.openDetail(movie: movie)
+    func onPosterPressed(showInfo: ShowInfo) {
+        router.openDetail(showInfo: showInfo)
     }
     
 }

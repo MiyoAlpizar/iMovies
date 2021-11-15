@@ -13,6 +13,7 @@ class HomeView: UITableViewController {
     var router = HomeRouter()
     private var viewModel = HomeViewModel()
     private var rc = UIRefreshControl()
+    var oldPosters = [Poster]()
     var posters = [Poster]()
     
     private var disposeBag = DisposeBag()
@@ -63,11 +64,9 @@ class HomeView: UITableViewController {
     
     
     private func reloadTableView() {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.tableView.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-            }
+        DispatchQueue.main.async { [self] in
+            self.tableView.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
         }
     }
 }

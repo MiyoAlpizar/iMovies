@@ -25,7 +25,7 @@ extension SearchView {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router.openDetail(movie: filteredMovies[indexPath.row])
+        //router.openDetail(movie: filteredMovies[indexPath.row])
         delayWithSeconds(0.3) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
