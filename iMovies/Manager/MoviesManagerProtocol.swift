@@ -8,17 +8,15 @@
 import Foundation
 import RxSwift
 
-/// Protocol to fecth movies info
+/// Protocol to fetch movies info
 protocol MoviesManagerProtocol {
     func getVideos(type: ShowType, id: Int) -> Observable<[MovieVideo]>
-    func getGenres() -> Observable<[Genre]>
-    func getMoviesByGenre(id:Int) -> Observable<[Movie]>
     func getMoviesByCategory(catgeory:MovieCategory) -> Observable<[Movie]>
-    func filterMovies(text:String) -> Observable<[Movie]>
-    
-    func getSeriesByGenre(id:Int) -> Observable<[Serie]>
     func getSeriesByCategory(catgeory:MovieCategory) -> Observable<[Serie]>
-    func filterSeries(text:String) -> Observable<[Serie]>
+    func getGenres(type: ShowType) -> Observable<[Genre]>
+    func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]>
+    
+    
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]>
     

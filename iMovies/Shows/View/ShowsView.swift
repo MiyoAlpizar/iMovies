@@ -8,16 +8,20 @@
 import UIKit
 import RxSwift
 
-private let reuseIdentifier = "Cell"
 
-class MoviesGenreView: UICollectionViewController {
+class ShowsView: UICollectionViewController {
     
-    var router = MoviesGenreRouter()
-    private var viewModel = MoviesGenreViewModel()
+    var router = ShowsRouter()
+    private var viewModel = ShowsViewModel()
     private var rc = UIRefreshControl()
-    var movies = [Movie]()
+    var showsInfo = [ShowInfo]()
     private var disposeBag = DisposeBag()
-    var genre: Genre? 
+    var genre: Genre? {
+        didSet {
+            self.navigationItem.title = genre?.name
+        }
+    }
+    var showType: ShowType = .movie
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +31,12 @@ class MoviesGenreView: UICollectionViewController {
     }
     
     private func loadMovies() {
-        guard let genre = genre else {
-            return
-        }
-        title = genre.name
-        viewModel.loadMoviesByGenre(id: genre.id)
-            .subscribe(on: MainScheduler.instance)
+        guard let genre = genre else { return }
+        viewModel.loadShowsByGenre(type: showType, id: genre.id)
             .observe(on: MainScheduler.instance)
-            .subscribe { movies in
-                self.movies = movies
+            .subscribe(on: MainScheduler.instance)
+            .subscribe { shows in
+                self.showsInfo = shows
                 self.reloadCollectionView()
             } onError: { error in
                 print(error.localizedDescription)
@@ -43,15 +44,7 @@ class MoviesGenreView: UICollectionViewController {
     }
     
     public func filterMovies(text: String) {
-        viewModel.searchMovies(text: text)
-            .subscribe(on: MainScheduler.instance)
-            .observe(on: MainScheduler.instance)
-            .subscribe { movies in
-                self.movies = movies
-                self.reloadCollectionView()
-            } onError: { error in
-                print(error.localizedDescription)
-            }.disposed(by: disposeBag)
+        
     }
     
     func reloadCollectionView() {
@@ -61,7 +54,7 @@ class MoviesGenreView: UICollectionViewController {
     }
     
     private func setupCollectionView() {
-        let width = (UIScreen.main.bounds.width / 3) - 24
+        let width = (UIScreen.main.bounds.width / 3) - 20
         let height = width * 1.4
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

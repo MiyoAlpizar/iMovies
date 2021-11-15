@@ -17,6 +17,8 @@ class CategoriesView: UITableViewController {
     var rc = UIRefreshControl()
     var genres = [Genre]()
     var filteredGenres = [Genre]()
+    private var segmentedType = UISegmentedControl(items: Constants.Common.ShowTypes)
+    var showType: ShowType = .movie
     
     lazy var searchController: UISearchController = {
        let search = UISearchController(searchResultsController: nil)
@@ -30,6 +32,7 @@ class CategoriesView: UITableViewController {
         viewModel.bind(view: self, router: router)
         setupController()
         setupSearchController()
+        setupSegmentedControll()
         getGenres()
     }
     
@@ -50,7 +53,7 @@ class CategoriesView: UITableViewController {
     }
     
     @objc private func getGenres() {
-        viewModel.loadGenres()
+        viewModel.loadGenres(type: showType)
             .subscribe(on: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe { genres in
@@ -83,6 +86,17 @@ class CategoriesView: UITableViewController {
                     return genre.name.lowercased().contains(text.lowercased())
                 })
                 self.reloadTableView()
+            }.disposed(by: disposeBag)
+    }
+    
+    private func setupSegmentedControll() {
+        navigationItem.titleView = segmentedType
+        segmentedType.selectedSegmentIndex = 0
+        segmentedType.rx.selectedSegmentIndex
+            .changed
+            .subscribe { index in
+                self.showType = index.element == 0 ? .movie : .serie
+                self.getGenres()
             }.disposed(by: disposeBag)
     }
     

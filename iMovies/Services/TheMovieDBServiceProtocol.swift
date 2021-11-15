@@ -10,16 +10,21 @@ import RxSwift
 
 ///Protocol to get movies info from  https://www.themoviedb.org
 protocol TheMovieDBServiceProtocol {
+    
     func fetchMovie(id: Int, completion: @escaping(Result<Movie, MovieError>) -> ())
-    func seacrhMovie(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchVideos(id: Int, type: ShowType, completion: @escaping(Result<MovieVideoResult, MovieError>) -> ())
-    func fetchGenres(completion: @escaping(Result<GenreResponse, MovieError>) -> ())
+    func fetchGenres(type: ShowType, completion: @escaping(Result<GenreResponse, MovieError>) -> ())
+    func searchMovies(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
+    func searchSeries(query: String, completion: @escaping(Result<SerieResults, MovieError>) -> ())
+    
+    
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
+    
+    
     
     func fetchSeries(category: MovieCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
-    func seacrhSeries(query: String, completion: @escaping(Result<SerieResults, MovieError>) -> ())
-    func fetchSeriesByGener(id: Int, completion: @escaping(Result<SerieResults, MovieError>) ->())
+    
 }
 
 enum MovieCategory: String {

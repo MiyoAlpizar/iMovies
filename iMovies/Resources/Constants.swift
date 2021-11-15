@@ -18,4 +18,8 @@ struct Constants {
         static let MediumPoster = CGSize(width: 120, height: 220)
     }
     
+    struct Common {
+        static let ShowTypes = ["Movies", "Series"]
+    }
+    
 }

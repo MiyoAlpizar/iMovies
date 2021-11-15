@@ -20,8 +20,8 @@ class CategoriesViewModel {
         self.router?.setSourceView(view)
     }
     
-    func loadGenres() -> Observable<[Genre]>{
-        return moviesManager.getGenres()
+    func loadGenres(type: ShowType) -> Observable<[Genre]>{
+        return moviesManager.getGenres(type: type)
     }
     
 }

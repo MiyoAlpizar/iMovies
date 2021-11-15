@@ -17,7 +17,7 @@ class HomeView: UITableViewController {
     var posters = [Poster]()
     
     private var disposeBag = DisposeBag()
-    private var segmentedType = UISegmentedControl(items: ["Movies", "Series"])
+    private var segmentedType = UISegmentedControl(items: Constants.Common.ShowTypes)
     var type: ShowType = .movie
     
     override func viewDidLoad() {

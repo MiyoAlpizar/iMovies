@@ -11,6 +11,8 @@ import RxSwift
 ///Fetches movies from https://www.themoviedb.org
 class MoviesDBManager: MoviesManagerProtocol {
     
+    
+    
     let service = TheMovieDBService.shared
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]> {
@@ -49,9 +51,9 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getGenres() -> Observable<[Genre]> {
+    func getGenres(type: ShowType) -> Observable<[Genre]> {
         return Observable.create { observer in
-            self.service.fetchGenres { result in
+            self.service.fetchGenres(type: type) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.genres)
@@ -64,20 +66,25 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getMoviesByGenre(id: Int) -> Observable<[Movie]> {
+    func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
         return Observable.create { observer in
-            self.service.fetchMovieByGener(id: id) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
+            switch type {
+            case .movie:
+                self.getMoviesByGenre(id: id) { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
                 }
-                observer.onCompleted()
+            case .serie:
+                self.getSeriesByGenre(id: id) { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
+                }
             }
             return Disposables.create {}
         }
     }
+    
+    
     
     func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
         return Observable.create { observer in
@@ -94,9 +101,11 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
+    
+    
     func filterMovies(text: String) -> Observable<[Movie]> {
         return Observable.create { observer in
-            self.service.seacrhMovie(query: text) { result in
+            self.service.searchMovies(query: text) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -141,7 +150,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     func filterSeries(text: String) -> Observable<[Serie]> {
         return Observable.create { observer in
-            self.service.seacrhSeries(query: text) { result in
+            self.service.searchSeries(query: text) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -247,6 +256,29 @@ extension MoviesDBManager {
             }
         }
     }
+    
+    private func getMoviesByGenre(id: Int, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.fetchMovieByGener(id: id) { result in
+            switch result {
+            case .success(let response):
+                completion(self.castMoviesToShowInfo(movies: response.results))
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
+    private func getSeriesByGenre(id: Int, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.fetchSeriesByGener(id: id) { result in
+            switch result {
+            case .success(let response):
+                completion(self.castSeriesToShowInfo(series: response.results))
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
 }
 
 

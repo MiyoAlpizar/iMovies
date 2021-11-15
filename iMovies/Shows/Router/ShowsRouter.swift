@@ -7,16 +7,16 @@
 
 import UIKit
 
-class MoviesGenreRouter {
+class ShowsRouter {
     
-    var viewController: MoviesGenreView {
+    var viewController: ShowsView {
         return createViewController()
     }
     
     private var sourceView: UIViewController?
     
-    private func createViewController() -> MoviesGenreView {
-        return MoviesGenreView.instance()
+    private func createViewController() -> ShowsView {
+        return ShowsView.instance()
     }
     
     func setSourceView(_ sourceView: UIViewController?) {

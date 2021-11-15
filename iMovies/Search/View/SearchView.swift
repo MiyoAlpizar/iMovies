@@ -17,7 +17,7 @@ class SearchView: UITableViewController {
     var movies = [Movie]()
     var filteredMovies = [Movie]()
     
-    let searchController = UISearchController(searchResultsController: MoviesGenreView.instance())
+    let searchController = UISearchController(searchResultsController: ShowsView.instance())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ class SearchView: UITableViewController {
             .distinctUntilChanged()
             .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe { filterText in
-                guard let vc = self.searchController.searchResultsController as? MoviesGenreView else {
+                guard let vc = self.searchController.searchResultsController as? ShowsView else {
                     return
                 }
                 guard let text = filterText.element else {
