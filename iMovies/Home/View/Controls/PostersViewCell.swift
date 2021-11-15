@@ -17,7 +17,7 @@ class PostersViewCell: UITableViewCell {
     weak var cellDelegate: PosterViewCellProtocol?
     private var oldShowInfo = [ShowInfo]()
     
-    public var category: MovieCategory?
+    public var category: ShowCategory?
     {
         didSet {
             if let category = category {

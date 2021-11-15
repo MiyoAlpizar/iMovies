@@ -71,7 +71,7 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
+    func getMoviesByCategory(catgeory: ShowCategory) -> Observable<[Movie]> {
         return Observable.create { observer in
             observer.onNext([])
             observer.onCompleted()
@@ -111,7 +111,7 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getSeriesByCategory(catgeory: MovieCategory) -> Observable<[Serie]> {
+    func getSeriesByCategory(catgeory: ShowCategory) -> Observable<[Serie]> {
         return Observable.create { observer in
             observer.onNext([])
             observer.onCompleted()

@@ -20,6 +20,6 @@ class SearchViewModel {
     }
     
     func loadMovies() -> Observable<[Movie]>{
-        return moviesManager.getMoviesByCategory(catgeory: MovieCategory.popular)
+        return moviesManager.getMoviesByCategory(catgeory: ShowCategory.popular)
     }
 }

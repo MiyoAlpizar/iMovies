@@ -8,11 +8,11 @@
 import Foundation
 
 struct HomeMovies {
-    let category: MovieCategory
+    let category: ShowCategory
     var movies: [Movie]
 }
 
 struct HomeSeries {
-    let category: MovieCategory
+    let category: ShowCategory
     var series: [Serie]
 }

@@ -86,7 +86,7 @@ class MoviesDBManager: MoviesManagerProtocol {
     
     
     
-    func getMoviesByCategory(catgeory: MovieCategory) -> Observable<[Movie]> {
+    func getMoviesByCategory(catgeory: ShowCategory) -> Observable<[Movie]> {
         return Observable.create { observer in
             self.service.fetchMovies(category: catgeory) { result in
                 switch result {
@@ -133,7 +133,7 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getSeriesByCategory(catgeory: MovieCategory) -> Observable<[Serie]> {
+    func getSeriesByCategory(catgeory: ShowCategory) -> Observable<[Serie]> {
         return Observable.create { observer in
             self.service.fetchSeries(category: catgeory) { result in
                 switch result {
@@ -171,14 +171,14 @@ extension MoviesDBManager {
     
     private func getHomeMovies(completion: @escaping(_ posters:[Poster]) -> ()) {
         var posters = [Poster]()
-        getMovieByCategory(category: MovieCategory.popular) { popular in
-            posters.append(Poster(category: MovieCategory.popular, posters: self.castMoviesToShowInfo(movies: popular)))
-            self.getMovieByCategory(category: MovieCategory.topRated) { topRated in
-                posters.append(Poster(category: MovieCategory.topRated, posters: self.castMoviesToShowInfo(movies: topRated)))
-                self.getMovieByCategory(category: MovieCategory.upcoming) { upcoming in
-                    posters.append(Poster(category: MovieCategory.upcoming, posters: self.castMoviesToShowInfo(movies: upcoming)))
-                    self.getMovieByCategory(category: MovieCategory.nowPlaying) { nowPlaying in
-                        posters.append(Poster(category: MovieCategory.nowPlaying, posters: self.castMoviesToShowInfo(movies: nowPlaying)))
+        getMovieByCategory(category: ShowCategory.popular) { popular in
+            posters.append(Poster(category: ShowCategory.popular, posters: self.castMoviesToShowInfo(movies: popular)))
+            self.getMovieByCategory(category: ShowCategory.topRated) { topRated in
+                posters.append(Poster(category: ShowCategory.topRated, posters: self.castMoviesToShowInfo(movies: topRated)))
+                self.getMovieByCategory(category: ShowCategory.upcoming) { upcoming in
+                    posters.append(Poster(category: ShowCategory.upcoming, posters: self.castMoviesToShowInfo(movies: upcoming)))
+                    self.getMovieByCategory(category: ShowCategory.nowPlaying) { nowPlaying in
+                        posters.append(Poster(category: ShowCategory.nowPlaying, posters: self.castMoviesToShowInfo(movies: nowPlaying)))
                         completion(posters)
                     }
                 }
@@ -186,7 +186,7 @@ extension MoviesDBManager {
         }
     }
     
-    private func getMovieByCategory(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
+    private func getMovieByCategory(category: ShowCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
         self.service.fetchMovies(category: category) { result in
             switch result {
             case .success(let movie):
@@ -199,14 +199,14 @@ extension MoviesDBManager {
     
     private func getHomeSeries(completion: @escaping(_ posters:[Poster]) -> ()) {
         var posters = [Poster]()
-        getSerieByCategory(category: MovieCategory.popular) { series in
-            posters.append(Poster(category: MovieCategory.popular, posters: self.castSeriesToShowInfo(series: series)))
-            self.getSerieByCategory(category: MovieCategory.topRated) { series in
-                posters.append(Poster(category: MovieCategory.topRated, posters: self.castSeriesToShowInfo(series: series)))
-                self.getSerieByCategory(category: MovieCategory.onTheAir) { series in
-                    posters.append(Poster(category: MovieCategory.onTheAir, posters: self.castSeriesToShowInfo(series: series)))
-                    self.getSerieByCategory(category: MovieCategory.latest) { series in
-                        posters.append(Poster(category: MovieCategory.latest, posters: self.castSeriesToShowInfo(series: series)))
+        getSerieByCategory(category: ShowCategory.popular) { series in
+            posters.append(Poster(category: ShowCategory.popular, posters: self.castSeriesToShowInfo(series: series)))
+            self.getSerieByCategory(category: ShowCategory.topRated) { series in
+                posters.append(Poster(category: ShowCategory.topRated, posters: self.castSeriesToShowInfo(series: series)))
+                self.getSerieByCategory(category: ShowCategory.onTheAir) { series in
+                    posters.append(Poster(category: ShowCategory.onTheAir, posters: self.castSeriesToShowInfo(series: series)))
+                    self.getSerieByCategory(category: ShowCategory.latest) { series in
+                        posters.append(Poster(category: ShowCategory.latest, posters: self.castSeriesToShowInfo(series: series)))
                         completion(posters)
                     }
                 }
@@ -214,7 +214,7 @@ extension MoviesDBManager {
         }
     }
     
-    private func getSerieByCategory(category: MovieCategory, completion: @escaping(_ series: [Serie]) -> ()) {
+    private func getSerieByCategory(category: ShowCategory, completion: @escaping(_ series: [Serie]) -> ()) {
         self.service.fetchSeries(category: category) { result in
             switch result {
             case .success(let serie):
@@ -225,7 +225,7 @@ extension MoviesDBManager {
         }
     }
     
-    private func getSeries(category: MovieCategory, completion: @escaping(_ movies: [Serie]) -> ()) {
+    private func getSeries(category: ShowCategory, completion: @escaping(_ movies: [Serie]) -> ()) {
         service.fetchSeries(category: category) { result in
             switch result {
             case .success(let response):
@@ -241,7 +241,7 @@ extension MoviesDBManager {
         }
     }
     
-    private func getMovies(category: MovieCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
+    private func getMovies(category: ShowCategory, completion: @escaping(_ movies: [Movie]) -> ()) {
         service.fetchMovies(category: category) { result in
             switch result {
             case .success(let response):

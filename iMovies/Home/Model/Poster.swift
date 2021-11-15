@@ -20,6 +20,6 @@ struct ShowInfo: Equatable {
 }
 
 struct Poster: Equatable {
-    let category: MovieCategory
+    let category: ShowCategory
     var posters: [ShowInfo]
 }

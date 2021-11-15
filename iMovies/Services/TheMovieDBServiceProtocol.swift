@@ -22,12 +22,12 @@ protocol TheMovieDBServiceProtocol {
     
     
     
-    func fetchSeries(category: MovieCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
+    func fetchSeries(category: ShowCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
     
 }
 
-enum MovieCategory: String {
+enum ShowCategory: String {
     case nowPlaying = "now_playing"
     case upcoming
     case topRated = "top_rated"

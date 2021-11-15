@@ -23,7 +23,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
     
    
     
-    func fetchMovies(category: MovieCategory, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
+    func fetchMovies(category: ShowCategory, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
             completion(.failure(.invalidEndpoint))
             return
@@ -83,7 +83,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                               completion: completion)
     }
     
-    func fetchSeries(category: MovieCategory, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+    func fetchSeries(category: ShowCategory, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/tv/\(category.rawValue)") else {
             completion(.failure(.invalidEndpoint))
             return

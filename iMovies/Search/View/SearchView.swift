@@ -18,11 +18,14 @@ class SearchView: UITableViewController {
     var filteredMovies = [Movie]()
     
     let searchController = UISearchController(searchResultsController: ShowsView.instance())
+    private var segmentedType = UISegmentedControl(items: Constants.Common.ShowTypes)
+    var showType: ShowType = .movie
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
         setupSearchController()
+        setupSegmentedControll()
         viewModel.bind(view: self, router: router)
         loadMovies()
     }
@@ -66,6 +69,17 @@ class SearchView: UITableViewController {
                 }
                 vc.filterMovies(text: text)
                 
+            }.disposed(by: disposeBag)
+    }
+    
+    private func setupSegmentedControll() {
+        navigationItem.titleView = segmentedType
+        segmentedType.selectedSegmentIndex = 0
+        segmentedType.rx.selectedSegmentIndex
+            .changed
+            .subscribe { index in
+                self.showType = index.element == 0 ? .movie : .serie
+                self.getGenres()
             }.disposed(by: disposeBag)
     }
     
