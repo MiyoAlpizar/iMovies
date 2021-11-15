@@ -10,11 +10,9 @@ import RxSwift
 
 ///Fetches movies from https://www.themoviedb.org
 class MoviesDBManager: MoviesManagerProtocol {
-    
-    
     let service = TheMovieDBService.shared
     
-    func getHomePosters(type: ShowType) -> Observable<[Poster]> {
+    func getHomeShows(type: ShowType) -> Observable<[Poster]> {
         return Observable.create { observer in
             switch type {
             case .movie:
@@ -173,10 +171,25 @@ class MoviesDBManager: MoviesManagerProtocol {
                     observer.onCompleted()
                 }
             }
-            
-            return Disposables.create {
-                
+            return Disposables.create {}
+        }
+    }
+    
+    func searchShows(type: ShowType, query: String) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            switch type {
+            case .movie:
+                self.searchMovies(query: query, completion: { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
+                })
+            case .serie:
+                self.searchSeries(query: query, completion: { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
+                })
             }
+            return Disposables.create {}
         }
     }
     
@@ -296,6 +309,27 @@ extension MoviesDBManager {
         }
     }
     
+    private func searchMovies(query: String, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.searchMovies(query: query) { results in
+            switch results {
+            case .success(let movies):
+                completion(self.castMoviesToShowInfo(movies: movies.results))
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
+    private func searchSeries(query: String, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.searchSeries(query: query) { results in
+            switch results {
+            case .success(let series):
+                completion(self.castSeriesToShowInfo(series: series.results))
+            case .failure:
+                completion([])
+            }
+        }
+    }
 }
 
 

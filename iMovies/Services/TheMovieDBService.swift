@@ -11,17 +11,12 @@ import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
     
-    
-    
-    
     static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
     private let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
-    
-   
     
     func fetchMovies(category: ShowCategory, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(category.rawValue)") else {
@@ -37,20 +32,6 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
             return
         }
         self.loadURLAndDecode(url: url, params: ["append_to_response": "videos,credits"] ,completion: completion)
-    }
-    
-    func searchShow(type: ShowType, query: String, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/search/\(type.rawValue)") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        self.loadURLAndDecode(url: url,
-                              params: [
-                                "language": Locale.current.languageCode ?? "en-US",
-                                "include_adult": "true",
-                                "query": query
-                               ],
-                              completion: completion)
     }
     
     func fetchVideos(id: Int, type: ShowType, completion: @escaping (Result<MovieVideoResult, MovieError>) -> ()) {
@@ -91,6 +72,20 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
         self.loadURLAndDecode(url: url, completion: completion)
     }
     
+    func fetchSeriesByGener(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/discover/tv") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url,
+                              params: [
+                                "language": Locale.current.languageCode ?? "en-US",
+                                "include_adult": "true",
+                                "with_genres": id.description
+                               ],
+                              completion: completion)
+    }
+    
     func fetchSerie(id: Int, completion: @escaping (Result<Serie, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/tv/\(id)") else {
             completion(.failure(.invalidEndpoint))
@@ -126,21 +121,6 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                                ],
                               completion: completion)
     }
-    
-    func fetchSeriesByGener(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/discover/tv") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        self.loadURLAndDecode(url: url,
-                              params: [
-                                "language": Locale.current.languageCode ?? "en-US",
-                                "include_adult": "true",
-                                "with_genres": id.description
-                               ],
-                              completion: completion)
-    }
-    
 }
 
 

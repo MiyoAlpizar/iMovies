@@ -66,6 +66,7 @@ class SearchView: UITableViewController {
                 guard text != "" else {
                     return
                 }
+                vc.showType = self.showType
                 vc.filterMovies(text: text)
                 
             }.disposed(by: disposeBag)

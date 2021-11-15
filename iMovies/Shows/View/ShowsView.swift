@@ -44,7 +44,17 @@ class ShowsView: UICollectionViewController {
     }
     
     public func filterMovies(text: String) {
-        
+        viewModel.filterShows(type: showType, query: text)
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe { shows in
+                self.showsInfo = shows
+                self.reloadCollectionView()
+            } onError: { error in
+                print(error.localizedDescription)
+            }.disposed(by: disposeBag)
+
     }
     
     func reloadCollectionView() {

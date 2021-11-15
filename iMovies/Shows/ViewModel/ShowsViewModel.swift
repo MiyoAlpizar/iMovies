@@ -23,4 +23,8 @@ class ShowsViewModel {
     func loadShowsByGenre(type: ShowType,id: Int) -> Observable<[ShowInfo]>{
         return moviesManager.getShowsByGenre(type: type, id: id)
     }
+    
+    func filterShows(type: ShowType, query: String) -> Observable<[ShowInfo]> {
+        return moviesManager.searchShows(type: type, query: query)
+    }
 }

@@ -42,7 +42,7 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getHomePosters(type: ShowType) -> Observable<[Poster]> {
+    func getHomeShows(type: ShowType) -> Observable<[Poster]> {
         return Observable.create { observer in
             observer.onNext([])
             observer.onCompleted()

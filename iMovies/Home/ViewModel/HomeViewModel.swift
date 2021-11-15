@@ -21,7 +21,7 @@ class HomeViewModel {
     }
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]> {
-        return moviesManager.getHomePosters(type: type)
+        return moviesManager.getHomeShows(type: type)
     }
     
    
