@@ -42,11 +42,11 @@ class DetailView: UIViewController {
         movieTitle.text = showInfo.name
         movieVotes.text = "\(showInfo.voteAverage)%"
         moviewOverView.text = showInfo.overview
-        loadVideos(id: showInfo.id)
+        loadVideos(id: showInfo.id, type: showInfo.type)
     }
     
-    private func loadVideos(id: Int) {
-        viewModel.loadVideos(id: id)
+    private func loadVideos(id: Int, type: showType) {
+        viewModel.loadVideos(id: id, type: type)
             .subscribe(on: 	MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe { movies in

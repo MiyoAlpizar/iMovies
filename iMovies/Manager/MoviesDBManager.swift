@@ -31,52 +31,12 @@ class MoviesDBManager: MoviesManagerProtocol {
     }
     
     
-    func getHomeMovies() -> Observable<[HomeMovies]> {
-        return Observable.create { observer in
-            var homeMovies = [HomeMovies]()
-            self.getMovies(category: MovieCategory.popular) { popular in
-                homeMovies.append(HomeMovies(category: .popular, movies: popular))
-                self.getMovies(category: MovieCategory.topRated) { topRated in
-                    homeMovies.append(HomeMovies(category: MovieCategory.topRated, movies: topRated))
-                    self.getMovies(category: MovieCategory.upcoming) { upcoming in
-                        homeMovies.append(HomeMovies(category: .upcoming, movies: upcoming))
-                        self.getMovies(category: MovieCategory.nowPlaying) { nowPlaying in
-                            homeMovies.append(HomeMovies(category: .nowPlaying, movies: nowPlaying))
-                            observer.onNext(homeMovies)
-                            observer.onCompleted()
-                        }
-                    }
-                }
-            }
-            return Disposables.create {}
-        }
-    }
+   
     
-    func getHomeSeries() -> Observable<[HomeSeries]> {
-        return Observable.create { observer in
-            var homeMovies = [HomeSeries]()
-            self.getSeries(category: MovieCategory.popular) { popular in
-                homeMovies.append(HomeSeries(category: .popular, series: popular))
-                self.getSeries(category: MovieCategory.topRated) { topRated in
-                    homeMovies.append(HomeSeries(category: MovieCategory.topRated, series: topRated))
-                    self.getSeries(category: MovieCategory.latest) { upcoming in
-                        homeMovies.append(HomeSeries(category: .latest, series: upcoming))
-                        self.getSeries(category: MovieCategory.onTheAir) { nowPlaying in
-                            homeMovies.append(HomeSeries(category: .onTheAir, series: nowPlaying))
-                            observer.onNext(homeMovies)
-                            observer.onCompleted()
-                        }
-                    }
-                }
-            }
-            return Disposables.create {}
-        }
-    }
-    
-    func getVideos(id: Int) -> Observable<[MovieVideo]> {
+    func getVideos(type: showType,id: Int) -> Observable<[MovieVideo]> {
         return Observable.create { observer in
             var moviewVides = [MovieVideo]()
-            TheMovieDBService.shared.fetchVideos(id: id) { result in
+            self.getVideos(type: type, id: id) { result in
                 switch result {
                 case .success(let videos):
                     moviewVides = videos.results
@@ -203,6 +163,13 @@ class MoviesDBManager: MoviesManagerProtocol {
 }
 
 extension MoviesDBManager {
+    
+    private func getVideos(type: showType, id: Int, completion:@escaping(Result<MovieVideoResult, MovieError>) -> ()) {
+        guard let url = URL(string: "\(APIService.shared.baseAPIURL)/\(type.rawValue)/\(id)/videos") else {
+            return
+        }
+        APIService.shared.loadURLAndDecode(url: url, completion: completion)
+    }
     
     private func getHomeMovies(completion: @escaping(_ posters:[Poster]) -> ()) {
         var posters = [Poster]()

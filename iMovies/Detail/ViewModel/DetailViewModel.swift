@@ -14,8 +14,8 @@ class DetailViewModel {
     private var router: DetailRouter?
     public var moviesManager = MoviesManagerHelper.shared.manager
     
-    func loadVideos(id: Int) -> Observable<[MovieVideo]> {
-        return moviesManager.getVideos(id: id)
+    func loadVideos(id: Int, type: showType) -> Observable<[MovieVideo]> {
+        return moviesManager.getVideos(type: type, id: id)
     }
     
 }
