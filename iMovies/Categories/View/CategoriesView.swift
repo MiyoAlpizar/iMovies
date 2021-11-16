@@ -42,7 +42,7 @@ class CategoriesView: UITableViewController {
         self.refreshControl = rc
         self.clearsSelectionOnViewWillAppear = true
         self.tableView.separatorColor = .clear
-        self.tableView.register(UINib(nibName: "CategoryViewCell", bundle: .main), forCellReuseIdentifier: CategoryViewCell.NAME)
+        self.tableView.register(UINib(nibName: CategoryViewCell.NAME, bundle: .main), forCellReuseIdentifier: CategoryViewCell.NAME)
     }
     
     func reloadTableView() {

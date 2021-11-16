@@ -50,9 +50,6 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    
-    
-    
     func getHomeMovies() -> Observable<[HomeMovies]> {
         return Observable.create { observer in
             observer.onNext([])
@@ -60,7 +57,6 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
             return Disposables.create {}
         }
     }
-    
     
     func getGenres(type: ShowType) -> Observable<[Genre]> {
         return Observable.create { observer in

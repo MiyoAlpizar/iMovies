@@ -53,7 +53,7 @@ class PostersViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UINib(nibName: "MoviePosterCell", bundle: nil), forCellWithReuseIdentifier: MoviePosterCell.NAME)
+        collectionView.register(UINib(nibName: MoviePosterCell.NAME, bundle: nil), forCellWithReuseIdentifier: MoviePosterCell.NAME)
         collectionView.collectionViewLayout = layout
         
     }

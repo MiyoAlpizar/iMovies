@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 class MoviePosterCell: UICollectionViewCell {
     
-    static let NAME = String(describing: self)
+    static let NAME = "MoviePosterCell"
     
     @IBOutlet weak var posterImage: UIImageView!
     

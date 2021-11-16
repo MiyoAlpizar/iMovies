@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-/// Protocol to fetch movies info
+/// Protocol to get any shows info
 protocol MoviesManagerProtocol {
     func getHomeShows(type: ShowType) -> Observable<[Poster]>
     func getVideos(type: ShowType, id: Int) -> Observable<[MovieVideo]>
