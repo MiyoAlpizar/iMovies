@@ -12,8 +12,7 @@ class HomeViewModel {
     
     private weak var view: HomeView?
     private var router: HomeRouter?
-    public var moviesManager = MoviesManagerHelper.shared.manager
-    
+     
     func bind(view: HomeView, router: HomeRouter) {
         self.view = view
         self.router = router
@@ -21,7 +20,7 @@ class HomeViewModel {
     }
     
     func getHomePosters(type: ShowType) -> Observable<[Poster]> {
-        return moviesManager.getHomeShows(type: type)
+        return MoviesManagerHelper.shared.manager.getHomeShows(type: type)
     }
     
    

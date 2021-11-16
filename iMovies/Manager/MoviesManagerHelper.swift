@@ -22,7 +22,7 @@ class MoviesManagerHelper: ReachabilityObserverDelegate {
         removeReachabilityObserver()
     }
     ///Fetching movies manager protocol
-    private(set) var manager: MoviesManagerProtocol = MoviesDBManager()
+    var manager: MoviesManagerProtocol = MoviesDBManager()
     
     func reachabilityChanged(_ isReachable: Bool) {
         //if lost connection, will fetch movies from local data base persisted (offline)

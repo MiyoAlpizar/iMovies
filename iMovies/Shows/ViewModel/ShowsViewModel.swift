@@ -12,7 +12,6 @@ class ShowsViewModel {
     
     private weak var view: ShowsView?
     private var router: ShowsRouter?
-    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: ShowsView, router: ShowsRouter) {
         self.view = view
@@ -21,10 +20,10 @@ class ShowsViewModel {
     }
     
     func loadShowsByGenre(type: ShowType,id: Int) -> Observable<[ShowInfo]>{
-        return moviesManager.getShowsByGenre(type: type, id: id)
+        return MoviesManagerHelper.shared.manager.getShowsByGenre(type: type, id: id)
     }
     
     func filterShows(type: ShowType, query: String) -> Observable<[ShowInfo]> {
-        return moviesManager.searchShows(type: type, query: query)
+        return MoviesManagerHelper.shared.manager.searchShows(type: type, query: query)
     }
 }

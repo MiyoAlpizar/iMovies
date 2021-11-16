@@ -30,4 +30,12 @@ class Movie: Object, Decodable {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")
     }
     
+    override class func primaryKey() -> String {
+            return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["backdropURL", "posterURL"]
+    }
+    
 }

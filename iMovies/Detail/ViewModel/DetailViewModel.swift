@@ -12,10 +12,10 @@ class DetailViewModel {
     
     private weak var view: DetailView?
     private var router: DetailRouter?
-    public var moviesManager = MoviesManagerHelper.shared.manager
+    
     
     func loadVideos(id: Int, type: ShowType) -> Observable<[MovieVideo]> {
-        return moviesManager.getVideos(type: type, id: id)
+        return MoviesManagerHelper.shared.manager.getVideos(type: type, id: id)
     }
     
 }

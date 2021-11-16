@@ -12,7 +12,6 @@ class CategoriesViewModel {
     
     private weak var view: CategoriesView?
     private var router: CategoriesRouter?
-    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: CategoriesView, router: CategoriesRouter) {
         self.view = view
@@ -21,7 +20,7 @@ class CategoriesViewModel {
     }
     
     func loadGenres(type: ShowType) -> Observable<[Genre]>{
-        return moviesManager.getGenres(type: type)
+        return MoviesManagerHelper.shared.manager.getGenres(type: type)
     }
     
 }

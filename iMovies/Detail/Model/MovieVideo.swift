@@ -22,4 +22,9 @@ class MovieVideo: Object, Decodable {
     @objc dynamic var type: String
     @objc dynamic var official: Bool
     @objc dynamic var publishedAt, id: String
+    
+    override class func primaryKey() -> String {
+            return "id"
+    }
+    
 }

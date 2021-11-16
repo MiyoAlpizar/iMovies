@@ -16,7 +16,7 @@ class APIService {
     let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
-    private let realmService = RealmService.shared
+    
     
     private init() { }
     
@@ -74,20 +74,6 @@ class APIService {
     private func executeCompletionHanlderInMainThread<D: Decodable>(with result: Result<D, MovieError>, completion: @escaping(Result<D, MovieError>) -> ()) {
         DispatchQueue.main.async {
             completion(result)
-            self.saveData(result: result)
         }
     }
-    
-    //Save date retrived from server to persists in cache
-    private func saveData<D: Decodable>(result: Result<D, MovieError>) {
-        switch result {
-        case .success(let data):
-            if let data = data as? Object {
-                self.realmService.add(data)
-            }
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
-    }
-    
 }

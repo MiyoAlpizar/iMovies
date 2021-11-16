@@ -15,4 +15,8 @@ struct GenreResponse: Decodable {
 class Genre: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var name: String
+    
+    override class func primaryKey() -> String {
+            return "id"
+    }
 }

@@ -54,6 +54,7 @@ class MoviesDBManager: MoviesManagerProtocol {
                 switch result {
                 case .success(let response):
                     observer.onNext(response.genres)
+                    PersistenceDataManager.shared.saveGenres(showType: type, genres: response.genres)
                 case .failure(let error):
                     observer.onError(error)
                 }
@@ -96,54 +97,9 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    func filterMovies(text: String) -> Observable<[Movie]> {
+    func getSeriesByCategory(category: ShowCategory) -> Observable<[Serie]> {
         return Observable.create { observer in
-            self.service.searchMovies(query: text) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
-                }
-                observer.onCompleted()
-            }
-            return Disposables.create {}
-        }
-    }
-    
-    func getSeriesByGenre(id: Int) -> Observable<[Serie]> {
-        return Observable.create { observer in
-            self.service.fetchSeriesByGener(id: id) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
-                }
-                observer.onCompleted()
-            }
-            return Disposables.create {}
-        }
-    }
-    
-    func getSeriesByCategory(catgeory: ShowCategory) -> Observable<[Serie]> {
-        return Observable.create { observer in
-            self.service.fetchSeries(category: catgeory) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
-                }
-                observer.onCompleted()
-            }
-            return Disposables.create {}
-        }
-    }
-    
-    func filterSeries(text: String) -> Observable<[Serie]> {
-        return Observable.create { observer in
-            self.service.searchSeries(query: text) { result in
+            self.service.fetchSeries(category: category) { result in
                 switch result {
                 case .success(let response):
                     observer.onNext(response.results)
@@ -221,6 +177,7 @@ extension MoviesDBManager {
             switch result {
             case .success(let movie):
                 completion(movie.results)
+                PersistenceDataManager.shared.saveMoviesCategory(category: category, movies: movie.results)
             case .failure:
                 completion([])
             }
@@ -249,6 +206,7 @@ extension MoviesDBManager {
             switch result {
             case .success(let serie):
                 completion(serie.results)
+                PersistenceDataManager.shared.saveSeriesCategory(category: category, series: serie.results)
             case .failure:
                 completion([])
             }
@@ -261,6 +219,7 @@ extension MoviesDBManager {
             case .success(let response):
                 if response.results.count > 0 {
                     completion(response.results)
+                    PersistenceDataManager.shared.saveSeries(serie: response.results)
                 }else {
                     completion([])
                 }
@@ -277,6 +236,7 @@ extension MoviesDBManager {
             case .success(let response):
                 if response.results.count > 0 {
                     completion(response.results)
+                    PersistenceDataManager.shared.saveMovies(movies: response.results)
                 }else {
                     completion([])
                 }
@@ -292,6 +252,7 @@ extension MoviesDBManager {
             switch result {
             case .success(let response):
                 completion(self.castMoviesToShowInfo(movies: response.results))
+                PersistenceDataManager.shared.saveMovies(movies: response.results)
             case .failure:
                 completion([])
             }
@@ -303,6 +264,7 @@ extension MoviesDBManager {
             switch result {
             case .success(let response):
                 completion(self.castSeriesToShowInfo(series: response.results))
+                PersistenceDataManager.shared.saveSeries(serie: response.results)
             case .failure:
                 completion([])
             }
@@ -314,6 +276,7 @@ extension MoviesDBManager {
             switch results {
             case .success(let movies):
                 completion(self.castMoviesToShowInfo(movies: movies.results))
+                PersistenceDataManager.shared.saveMovies(movies: movies.results)
             case .failure:
                 completion([])
             }
@@ -325,6 +288,7 @@ extension MoviesDBManager {
             switch results {
             case .success(let series):
                 completion(self.castSeriesToShowInfo(series: series.results))
+                PersistenceDataManager.shared.saveSeries(serie: series.results)
             case .failure:
                 completion([])
             }

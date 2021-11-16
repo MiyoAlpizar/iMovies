@@ -11,7 +11,6 @@ import RxSwift
 class SearchViewModel {
     private weak var view: SearchView?
     private var router: SearchRouter?
-    public var moviesManager = MoviesManagerHelper.shared.manager
     
     func bind(view: SearchView, router: SearchRouter) {
         self.view = view
@@ -20,6 +19,6 @@ class SearchViewModel {
     }
     
     func loadShows(type: ShowType) -> Observable<[ShowInfo]>{
-        return moviesManager.getShowsByCategory(type: type, category: ShowCategory.topRated)
+        return MoviesManagerHelper.shared.manager.getShowsByCategory(type: type, category: ShowCategory.topRated)
     }
 }
