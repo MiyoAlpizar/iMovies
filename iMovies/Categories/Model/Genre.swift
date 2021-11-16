@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct GenreResponse: Decodable {
     let genres: [Genre]
 }
 
-struct Genre: Decodable {
-    let id: Int
-    let name: String
+class Genre: Object, Decodable {
+    @objc dynamic var id: Int
+    @objc dynamic var name: String
 }

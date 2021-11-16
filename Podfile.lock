@@ -1,6 +1,11 @@
 PODS:
   - Differ (1.4.5)
   - ReachabilitySwift (5.0.0)
+  - Realm (10.19.0):
+    - Realm/Headers (= 10.19.0)
+  - Realm/Headers (10.19.0)
+  - RealmSwift (10.19.0):
+    - Realm (= 10.19.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -15,6 +20,7 @@ PODS:
 DEPENDENCIES:
   - Differ
   - ReachabilitySwift
+  - RealmSwift
   - RxCocoa
   - RxSwift
   - SDWebImage
@@ -24,6 +30,8 @@ SPEC REPOS:
   trunk:
     - Differ
     - ReachabilitySwift
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -33,12 +41,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Differ: 3b6bd78e2b20cc795d9a86f7641d087524e4273e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  Realm: 869ab2a7e3bdfa6bf06d8723251539f504e6f602
+  RealmSwift: f1f51c4a02fe826e5cea623b5441992f06bdc942
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
 
-PODFILE CHECKSUM: 36e81d3be03bbfacd6bcf9d0ec248699ef071674
+PODFILE CHECKSUM: 5d6a05a70f1a38e1c16d158e817516483372b4f9
 
 COCOAPODS: 1.11.2
