@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SDWebImage
 
 class PersistenceDataManager {
     static let shared = PersistenceDataManager()
@@ -31,6 +32,10 @@ class PersistenceDataManager {
         
         //Add or update category movies array
         realmService.AddOrUpdate(categoryMovies)
+        
+        
+        //save images on cache
+        saveMovieImages(movies: movies)
     }
     
     func saveSeriesCategory(category: ShowCategory, series: [Serie]) {
@@ -51,11 +56,8 @@ class PersistenceDataManager {
         //Add or update category series array
         realmService.AddOrUpdate(categorySeries)
         
-        
-        let _series = realmService.realm.objects(Serie.self)
-        let _categories = realmService.realm.objects(CategorySeries.self)
-        print("Hay \(_series.count) Series")
-        print("Hay \(_categories.count) ShowCategories")
+        //save images on cache
+        saveSeriesImages(series: series)
     }
     
     func saveGenres(showType: ShowType, genres: [Genre]) {
@@ -80,10 +82,12 @@ class PersistenceDataManager {
     
     func saveMovies(movies: [Movie]) {
         realmService.AddOrUpdate(movies)
+        saveMovieImages(movies: movies)
     }
     
     func saveSeries(serie: [Serie]) {
         realmService.AddOrUpdate(serie)
+        saveSeriesImages(series: serie)
     }
     
 }
@@ -126,5 +130,26 @@ extension PersistenceDataManager {
         RealmService.shared.AddOrUpdate(seriesGenres)
         let mgs = RealmService.shared.realm.objects(SeriesGenre.self)
         print("Hay \(mgs.count) genros de series")
+    }
+    
+    private func saveMovieImages(movies: [Movie]) {
+        for movie in movies {
+            self.saveImageOnCache(url: movie.backdropURL)
+            self.saveImageOnCache(url: movie.posterURL)
+        }
+    }
+    
+    private func saveSeriesImages(series: [Serie]) {
+        for serie in series {
+            self.saveImageOnCache(url: serie.backdropURL)
+            self.saveImageOnCache(url: serie.posterURL)
+        }
+    }
+    
+    private func saveImageOnCache(url: URL?) {
+        guard let url = url else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: SDWebImageOptions.continueInBackground, progress: nil) { _, _, _, _, _, _ in
+            
+        }
     }
 }

@@ -23,7 +23,12 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
     
     func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
         return Observable.create { observer in
-            observer.onNext([])
+            switch type {
+            case .movie:
+                observer.onNext(self.getMoviesByGenre(genreId: id))
+            case .serie:
+                observer.onNext(self.getSeriesByGenre(genreId: id))
+            }
             observer.onCompleted()
             return Disposables.create {}
         }
@@ -127,10 +132,10 @@ extension MoviesLocalDBManager {
     
     private func getMovieByCategory(category: ShowCategory) -> [ShowInfo] {
         var shows = [ShowInfo]()
-        let categoryMobies = RealmService.shared.realm.objects(CategoryMovies.self).filter("category == '\(category.rawValue)'").first
-        if let categoryMobies = categoryMobies {
-            let ids = Array(categoryMobies.idMovies.map({ Int($0) }))
-            let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@", ids)
+        let categoryMovies = RealmService.shared.realm.objects(CategoryMovies.self).filter("category == '\(category.rawValue)'").first
+        if let categoryMovies = categoryMovies {
+            let ids = Array(categoryMovies.idMovies.map({ Int($0) }))
+            let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", ids)
             for item in movies {
                 shows.append(item.toShowInfo())
             }
@@ -143,7 +148,7 @@ extension MoviesLocalDBManager {
         let categorySeries = RealmService.shared.realm.objects(CategorySeries.self).filter("category == '\(category.rawValue)'").first
         if let categoryMobies = categorySeries {
             let ids = Array(categoryMobies.idSeries.map({ Int($0) }))
-            let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@", ids)
+            let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", ids)
             for item in series {
                 shows.append(item.toShowInfo())
             }
@@ -169,5 +174,27 @@ extension MoviesLocalDBManager {
             }
         }
         return geners
+    }
+    
+    private func getMoviesByGenre(genreId: Int) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let genres = RealmService.shared.realm.objects(MoviesGenre.self).filter("genreId == \(genreId)")
+        let moviesIds = Array(genres.map({ Int($0.movieId) }))
+        let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@", moviesIds)
+        for item in movies {
+            shows.append(item.toShowInfo())
+        }
+        return shows
+    }
+    
+    private func getSeriesByGenre(genreId: Int) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let genres = RealmService.shared.realm.objects(SeriesGenre.self).filter("genreId == \(genreId)")
+        let seriesIds = Array(genres.map({ Int($0.serieId) }))
+        let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@", seriesIds)
+        for item in series {
+            shows.append(item.toShowInfo())
+        }
+        return shows
     }
 }

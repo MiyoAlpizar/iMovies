@@ -304,7 +304,9 @@ extension MoviesDBManager {
         var showsInfo = [ShowInfo]()
         for item in movies {
             if (item.posterPath != nil && item.backdropPath != nil) {
-                showsInfo.append(item.toShowInfo())
+                if item.posterPath != "" && item.backdropPath != "" {
+                    showsInfo.append(item.toShowInfo())
+                }
             }
         }
         return showsInfo
@@ -314,7 +316,9 @@ extension MoviesDBManager {
         var showsInfo = [ShowInfo]()
         for item in series {
             if (item.posterPath != nil && item.backdropPath != nil) {
-                showsInfo.append(item.toShowInfo())
+                if item.posterPath != "" && item.backdropPath != "" {
+                    showsInfo.append(item.toShowInfo())
+                }
             }
         }
         return showsInfo
