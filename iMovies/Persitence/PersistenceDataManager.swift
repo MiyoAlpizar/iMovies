@@ -82,11 +82,13 @@ class PersistenceDataManager {
     
     func saveMovies(movies: [Movie]) {
         realmService.AddOrUpdate(movies)
+        saveGenreAndMovies(movies: movies)
         saveMovieImages(movies: movies)
     }
     
     func saveSeries(serie: [Serie]) {
         realmService.AddOrUpdate(serie)
+        saveGenreAndSeries(series: serie)
         saveSeriesImages(series: serie)
     }
     

@@ -180,7 +180,7 @@ extension MoviesLocalDBManager {
         var shows = [ShowInfo]()
         let genres = RealmService.shared.realm.objects(MoviesGenre.self).filter("genreId == \(genreId)")
         let moviesIds = Array(genres.map({ Int($0.movieId) }))
-        let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@", moviesIds)
+        let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", moviesIds)
         for item in movies {
             shows.append(item.toShowInfo())
         }
@@ -191,7 +191,7 @@ extension MoviesLocalDBManager {
         var shows = [ShowInfo]()
         let genres = RealmService.shared.realm.objects(SeriesGenre.self).filter("genreId == \(genreId)")
         let seriesIds = Array(genres.map({ Int($0.serieId) }))
-        let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@", seriesIds)
+        let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", seriesIds)
         for item in series {
             shows.append(item.toShowInfo())
         }
