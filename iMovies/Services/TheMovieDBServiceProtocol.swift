@@ -16,12 +16,7 @@ protocol TheMovieDBServiceProtocol {
     func fetchGenres(type: ShowType, completion: @escaping(Result<GenreResponse, MovieError>) -> ())
     func searchMovies(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func searchSeries(query: String, completion: @escaping(Result<SerieResults, MovieError>) -> ())
-    
-    
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
-    
-    
-    
     func fetchSeries(category: ShowCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
     
