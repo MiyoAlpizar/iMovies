@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05B4E8FF483FE28FE3AC1E2A /* Pods_iMoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF1ACB79D77FDCF9098A086 /* Pods_iMoviesTests.framework */; };
 		626BCEF6C40E3B721B477BD9 /* Pods_iMovies_iMoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669DCA7F6A44D4F660916B08 /* Pods_iMovies_iMoviesUITests.framework */; };
+		6A5271B627434A21001211E9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5271B527434A21001211E9 /* RealmService.swift */; };
 		6A74C8C22740401F00376CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8C12740401F00376CDA /* AppDelegate.swift */; };
 		6A74C8C42740401F00376CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8C32740401F00376CDA /* SceneDelegate.swift */; };
 		6A74C8CB2740402000376CDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A74C8CA2740402000376CDA /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		52447EF268C697575307615A /* Pods-iMoviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesTests.release.xcconfig"; path = "Target Support Files/Pods-iMoviesTests/Pods-iMoviesTests.release.xcconfig"; sourceTree = "<group>"; };
 		635B680A81E85ECAA15CB09A /* Pods-iMovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMovies.release.xcconfig"; path = "Target Support Files/Pods-iMovies/Pods-iMovies.release.xcconfig"; sourceTree = "<group>"; };
 		669DCA7F6A44D4F660916B08 /* Pods_iMovies_iMoviesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMovies_iMoviesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5271B527434A21001211E9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		6A74C8BE2740401F00376CDA /* iMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A74C8C12740401F00376CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A74C8C32740401F00376CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				6A9D2D802740508C00A6E09A /* TheMovieDBServiceProtocol.swift */,
 				6A9D2D842740512100A6E09A /* TheMovieDBService.swift */,
 				6AA48A652742D6C100B497A3 /* APIService.swift */,
+				6A5271B527434A21001211E9 /* RealmService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 				6A9D2DC42740E03B00A6E09A /* CategoriesView.swift in Sources */,
 				6AA48A6A2742FD1100B497A3 /* Collections+Extentsions.swift in Sources */,
 				6A9D2DE22740F3B100A6E09A /* DetailViewModel.swift in Sources */,
+				6A5271B627434A21001211E9 /* RealmService.swift in Sources */,
 				6A85C4382741D05F00E38920 /* Reachability.swift in Sources */,
 				6A9D2D812740508C00A6E09A /* TheMovieDBServiceProtocol.swift in Sources */,
 				6A9D2DE52740F66200A6E09A /* PosterViewCellProtocol.swift in Sources */,
