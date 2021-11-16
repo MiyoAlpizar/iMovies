@@ -11,7 +11,6 @@ class RealmService {
     private init () {
         
     }
-    
     var realm = try! Realm()
     
     func add<T: Object>(_ object: T) {

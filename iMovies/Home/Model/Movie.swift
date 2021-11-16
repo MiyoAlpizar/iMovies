@@ -21,6 +21,7 @@ class Movie: Object, Decodable {
     @objc dynamic var voteAverage: Double
     @objc dynamic var voteCount: Int
     @objc dynamic var releaseDate: String?
+    var genreIds: List<Int>? = [].toList()
     
     var backdropURL: URL? {
         return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")

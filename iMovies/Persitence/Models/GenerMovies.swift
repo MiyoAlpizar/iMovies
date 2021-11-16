@@ -16,5 +16,4 @@ class GenerMovies: Object {
     override class func primaryKey() -> String {
             return "showType"
     }
-    
 }

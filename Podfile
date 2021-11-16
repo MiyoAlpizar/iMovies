@@ -12,7 +12,7 @@ target 'iMovies' do
   pod 'youtube-ios-player-helper'
   pod 'ReachabilitySwift'
   pod 'Differ'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~>10'
 
   target 'iMoviesTests' do
     inherit! :search_paths

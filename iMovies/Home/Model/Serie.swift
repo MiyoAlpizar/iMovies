@@ -21,6 +21,7 @@ class Serie: Object, Decodable {
     @objc dynamic var voteAverage: Double
     @objc dynamic var voteCount: Int
     @objc dynamic var firstAirDate: String?
+    var genreIds: List<Int>? = nil
     
     var backdropURL: URL? {
         return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")

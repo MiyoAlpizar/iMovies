@@ -18,6 +18,7 @@ class PersistenceDataManager {
         
         //Add Or Update Movies
         realmService.AddOrUpdate(movies)
+        saveGenreAndMovies(movies: movies)
         
         //Get the movies Ids
         let ids = movies.reduce([Int](), { $0 + [$1.id] })
@@ -30,18 +31,13 @@ class PersistenceDataManager {
         
         //Add or update category movies array
         realmService.AddOrUpdate(categoryMovies)
-        
-        
-        let _movies = realmService.realm.objects(Movie.self)
-        let _categories = realmService.realm.objects(CategoryMovies.self)
-        print("Hay \(_movies.count) Movies")
-        print("Hay \(_categories.count) ShowCategories")
     }
     
     func saveSeriesCategory(category: ShowCategory, series: [Serie]) {
         
         //Add Or Update Series
         realmService.AddOrUpdate(series)
+        saveGenreAndSeries(series: series)
         
         //Get the series Ids
         let ids = series.reduce([Int](), { $0 + [$1.id] })
@@ -93,7 +89,42 @@ class PersistenceDataManager {
 }
 
 extension PersistenceDataManager {
+    
     private func saveCategories() {
         
+    }
+    
+    private func saveGenreAndMovies(movies: [Movie]) {
+        var movieGenres = [MoviesGenre]()
+        for movie in movies {
+            guard let genres = movie.genreIds else {
+                return
+            }
+            for genre in genres {
+                let mg = MoviesGenre()
+                mg.setIds(genreId: genre, movieId: movie.id)
+                movieGenres.append(mg)
+            }
+        }
+        RealmService.shared.AddOrUpdate(movieGenres)
+        let mgs = RealmService.shared.realm.objects(MoviesGenre.self)
+        print("Hay \(mgs.count) genros de movies")
+    }
+    
+    private func saveGenreAndSeries(series: [Serie]) {
+        var seriesGenres = [SeriesGenre]()
+        for serie in series {
+            guard let genres = serie.genreIds else {
+                return
+            }
+            for genre in genres {
+                let sg = SeriesGenre()
+                sg.setIds(genreId: genre, serieId: serie.id)
+                seriesGenres.append(sg)
+            }
+        }
+        RealmService.shared.AddOrUpdate(seriesGenres)
+        let mgs = RealmService.shared.realm.objects(SeriesGenre.self)
+        print("Hay \(mgs.count) genros de series")
     }
 }

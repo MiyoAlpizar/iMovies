@@ -20,7 +20,7 @@ PODS:
 DEPENDENCIES:
   - Differ
   - ReachabilitySwift
-  - RealmSwift
+  - RealmSwift (~> 10)
   - RxCocoa
   - RxSwift
   - SDWebImage
@@ -49,6 +49,6 @@ SPEC CHECKSUMS:
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
 
-PODFILE CHECKSUM: 5d6a05a70f1a38e1c16d158e817516483372b4f9
+PODFILE CHECKSUM: 3dbad54fbe91d1f434c8dad35c9397b7c7afc89d
 
 COCOAPODS: 1.11.2
