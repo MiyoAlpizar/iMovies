@@ -83,6 +83,13 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
     
     func getSimilarShows(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
         return Observable.create { observer in
+            switch type {
+            case .movie:
+                observer.onNext(self.getSimilarMovies(id: id))
+            case .serie:
+                observer.onNext(self.getSimilarSeries(id: id))
+            }
+            observer.onCompleted()
             return Disposables.create{ }
         }
     }
@@ -204,6 +211,26 @@ extension MoviesLocalDBManager {
         let series = RealmService.shared.realm.objects(Serie.self).filter { serie in
             return serie.name.lowercased().contains(query) && serie.backdropURL != nil && serie.posterPath != nil
         }
+        shows.append(contentsOf: series.map({ $0.toShowInfo() }))
+        return shows
+    }
+    
+    private func getSimilarMovies(id: Int) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let ids = RealmService.shared.realm.objects(SimilarMovies.self).filter("id == \(id)").first
+        guard let ids = ids else { return shows }
+        let moviesIds = Array(ids.idMovies)
+        let series = RealmService.shared.realm.objects(Movie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", moviesIds)
+        shows.append(contentsOf: series.map({ $0.toShowInfo() }))
+        return shows
+    }
+    
+    private func getSimilarSeries(id: Int) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let ids = RealmService.shared.realm.objects(SimilarSeries.self).filter("id == \(id)").first
+        guard let ids = ids else { return shows }
+        let seriesIds = Array(ids.idSeries)
+        let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", seriesIds)
         shows.append(contentsOf: series.map({ $0.toShowInfo() }))
         return shows
     }

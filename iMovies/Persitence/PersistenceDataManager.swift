@@ -92,6 +92,25 @@ class PersistenceDataManager {
         saveSeriesImages(series: serie)
     }
     
+    func saveSimilarMovies(id: Int, movies:[Movie]) {
+        //Get the movies Ids
+        let ids = movies.reduce([Int](), { $0 + [$1.id] })
+        let similarMovies = SimilarMovies()
+        similarMovies.id = id
+        similarMovies.idMovies = ids.toList()
+        realmService.AddOrUpdate(similarMovies)
+        saveMovies(movies: movies)
+    }
+    
+    func saveSimilarSeries(id: Int, series:[Serie]) {
+        //Get the series Ids
+        let ids = series.reduce([Int](), { $0 + [$1.id] })
+        let similarSeries = SimilarSeries()
+        similarSeries.id = id
+        similarSeries.idSeries = ids.toList()
+        realmService.AddOrUpdate(similarSeries)
+        saveSeries(serie: series)
+    }
 }
 
 extension PersistenceDataManager {

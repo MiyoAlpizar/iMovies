@@ -288,6 +288,7 @@ extension MoviesDBManager {
             switch result {
                 case .success(let movies):
                 completion(self.castMoviesToShowInfo(movies: movies.results))
+                PersistenceDataManager.shared.saveSimilarMovies(id: id, movies: movies.results)
             case .failure:
                 completion([])
             }
@@ -299,6 +300,7 @@ extension MoviesDBManager {
             switch result {
                 case .success(let series):
                 completion(self.castSeriesToShowInfo(series: series.results))
+                PersistenceDataManager.shared.saveSimilarSeries(id: id,series: series.results)
             case .failure:
                 completion([])
             }
