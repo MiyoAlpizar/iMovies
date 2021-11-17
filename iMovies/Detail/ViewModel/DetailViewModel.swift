@@ -11,8 +11,13 @@ import RxSwift
 class DetailViewModel {
     
     private weak var view: DetailView?
-    private var router: DetailRouter?
+    var router: DetailRouter?
     
+    func bind(view: DetailView, router: DetailRouter) {
+        self.view = view
+        self.router = router
+        self.router?.setSourceView(view)
+    }
     
     func loadVideos(id: Int, type: ShowType) -> Observable<[MovieVideo]> {
         return MoviesManagerHelper.shared.manager.getVideos(type: type, id: id)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension DetailView: UITableViewDelegate, UITableViewDataSource {
+extension DetailView: UITableViewDelegate, UITableViewDataSource, PosterViewCellProtocol {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -18,7 +18,7 @@ extension DetailView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostersViewCell.NAME) as! PostersViewCell
         cell.category = .similiar
         cell.showInfo = similarShows
-        //cell.cellDelegate = self
+        cell.cellDelegate = self
         return cell
     }
     
@@ -43,6 +43,10 @@ extension DetailView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constants.Sizes.MediumPoster.height
+    }
+    
+    func onPosterPressed(showInfo: ShowInfo) {
+        self.router.pushShow(showInfo: showInfo)
     }
     
 }

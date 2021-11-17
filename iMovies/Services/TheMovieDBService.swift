@@ -130,7 +130,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
     }
     
     func fetchSimilarSeries(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/tv/\(id)/simial") else {
+        guard let url = URL(string: "\(baseAPIURL)/tv/\(id)/similar") else {
             completion(.failure(.invalidEndpoint))
             return
         }

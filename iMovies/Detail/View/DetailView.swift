@@ -16,19 +16,17 @@ class DetailView: UIViewController {
     private var disposeBag = DisposeBag()
     @IBOutlet weak var posterImg: UIImageView!
     @IBOutlet weak var videoPlayerView: YTPlayerView!
-    
-    
-    
     @IBOutlet weak var tableView: UITableView!
-    
     var viewModel: DetailViewModel = DetailViewModel()
+    var router = DetailRouter()
     
     public var showInfo: ShowInfo?
     public var similarShows = [ShowInfo]()
-
+    public weak var cellDelegate: PosterViewCellProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.bind(view: self, router: router)
         videoPlayerView.isHidden = true
         setupTableView()
         if let showInfo = showInfo {

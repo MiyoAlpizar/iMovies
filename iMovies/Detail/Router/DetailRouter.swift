@@ -23,4 +23,10 @@ class DetailRouter {
         guard let view = sourceView else { return }
         self.sourceView = view
     }
+    
+    func pushShow(showInfo: ShowInfo) {
+        let detailView = DetailRouter().viewController
+        detailView.showInfo = showInfo
+        self.sourceView?.navigationController?.pushViewController(detailView, animated: true)
+    }
 }

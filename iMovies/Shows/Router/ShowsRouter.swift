@@ -27,7 +27,9 @@ class ShowsRouter {
     func openDetail(showInfo: ShowInfo) {
         let detailView = DetailRouter().viewController
         detailView.showInfo = showInfo
-        sourceView?.present(detailView, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: detailView)
+        detailView.navigationController?.isNavigationBarHidden = true
+        sourceView?.present(navigationController, animated: true, completion: nil)
     }
     
 }
