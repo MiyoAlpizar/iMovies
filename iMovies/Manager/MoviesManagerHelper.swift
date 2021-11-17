@@ -22,6 +22,7 @@ class MoviesManagerHelper: ReachabilyDelegate {
     deinit {
         ReachabilityHelper.shared.removeListener(listener: self)
     }
+    
     ///Fetching movies manager protocol
     var manager: MoviesManagerProtocol = MoviesLocalDBManager()
     

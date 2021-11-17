@@ -12,6 +12,7 @@ class MovieServiceTests: XCTestCase {
     
     let service: TheMovieDBServiceProtocol = TheMovieDBService.shared
     
+    ///Should return  movies array as always as there is internet connection
     func testFetchMovies() {
         service.fetchMovies(category: ShowCategory.popular) { results in
             switch results {
@@ -23,11 +24,24 @@ class MovieServiceTests: XCTestCase {
         }
     }
     
+    ///Should return  series array as always as there is internet connection
     func testFetchSeries() {
         service.fetchSeries(category: ShowCategory.popular) { results in
             switch results {
             case .success(let response):
                 XCTAssertTrue(response.results.count > 0)
+            case .failure(let error):
+                XCTAssertTrue(false, error.localizedDescription)
+            }
+        }
+    }
+    
+    ///Should return  genre array as always as there is internet connection
+    func testFetchGenres() {
+        service.fetchGenres(type: ShowType.serie) { results in
+            switch results {
+            case .success(let response):
+                XCTAssertTrue(response.genres.count > 0)
             case .failure(let error):
                 XCTAssertTrue(false, error.localizedDescription)
             }

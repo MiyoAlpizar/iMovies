@@ -12,71 +12,98 @@ import RxSwift
 class ManagerTests: XCTestCase {
 
     private var disposedBag = DisposeBag()
-    private var shows = [ShowInfo]()
-    //should return an array of ShowInfo
-    func testShowsByCategory() throws {
+    
+    //should return an array of ShowInfo as always there is internet connection
+    func testShowsByCategory() {
+        var shows = [ShowInfo]()
+        let expectation = expectation(description: "Waiting for result")
         
         let manager: MoviesManagerProtocol = MoviesDBManager()
         
         manager.getShowsByCategory(type: ShowType.movie, category: ShowCategory.popular)
             .observe(on: MainScheduler.instance)
             .subscribe(on: MainScheduler.instance)
-            .subscribe { shows in
-                self.shows = shows
+            .subscribe { _shows in
+                shows = _shows
             }
             onError: { error in
                 print(error.localizedDescription)
             }
             onCompleted: {
-                XCTAssertTrue(self.shows.count > 0)
+                XCTAssertGreaterThan(shows.count, 0)
+                expectation.fulfill()
+            }.disposed(by: disposedBag)
+        waitForExpectations(timeout: 0.1)
+    }
+    
+    //should return an array of ShowInfo no matter if there is internet connection
+    func testShowsByCategoryOnlineOffline() {
+        var shows = [ShowInfo]()
+        let expectation = expectation(description: "Waiting for result")
+        let manager: MoviesManagerProtocol = MoviesManagerHelper.shared.manager
+        
+        manager.getShowsByCategory(type: ShowType.movie, category: ShowCategory.popular)
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe { _shows in
+                shows = _shows
             }
-                    
-            .disposed(by: disposedBag)
+            onError: { error in
+                print(error.localizedDescription)
+            }
+            onCompleted: {
+                XCTAssertGreaterThan(shows.count, 0)
+                expectation.fulfill()
+            }.disposed(by: disposedBag)
+        waitForExpectations(timeout: 0.1)
     }
     
-    //should return an array of Genre
-    func testGetGenres() throws {
+    //should return the same movie searching online and then offline
+    func testSameMovieOnlineOffLine() {
+        let movieTitle = "Apex"
         
-        let manager: MoviesManagerProtocol = MoviesDBManager()
+        var onlineMovie: ShowInfo?
+        var offlineMovie: ShowInfo?
         
-        manager.getGenres(type: ShowType.movie)
+        let expectation = expectation(description: "Waiting for result")
+        
+        let onlineManager: MoviesManagerProtocol = MoviesDBManager()
+        let offlineManager: MoviesManagerProtocol = MoviesLocalDBManager()
+        
+        onlineManager.searchShows(type: ShowType.movie, query: movieTitle)
             .observe(on: MainScheduler.instance)
             .subscribe(on: MainScheduler.instance)
-            .subscribe { genres in
-                XCTAssertTrue(genres.count > 0)
+            .subscribe { shows in
+                guard shows.count > 0 else {
+                    return
+                }
+                onlineMovie = shows[0]
             } onError: { error in
-                print(error.localizedDescription)
+                XCTAssertTrue(false, error.localizedDescription)
+            } onCompleted: {
+                
+                offlineManager.searchShows(type: .movie, query: movieTitle)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(on: MainScheduler.instance)
+                    .subscribe { shows in
+                        guard shows.count > 0 else {
+                            return
+                        }
+                        offlineMovie = shows[0]
+                    } onError: { error in
+                        XCTAssertTrue(false, error.localizedDescription)
+                    } onCompleted: {
+                        XCTAssertEqual(onlineMovie?.id, offlineMovie?.id)
+                        expectation.fulfill()
+                    }.disposed(by: self.disposedBag)
+                
             }.disposed(by: disposedBag)
+        
+        waitForExpectations(timeout: 0.5)
     }
     
-    //should return at least one Movie with the extactly title
-    func testSearchMovie() throws {
-        
-        let manager: MoviesManagerProtocol = MoviesDBManager()
-        
-        manager.searchShows(type: ShowType.movie, query: "How i met your murderer")
-            .observe(on: MainScheduler.instance)
-            .subscribe(on: MainScheduler.instance)
-            .subscribe { movies in
-                XCTAssertTrue(movies.count > 0)
-            } onError: { error in
-                print(error.localizedDescription)
-            }.disposed(by: disposedBag)
-    }
     
-    //should return at least one serie with the extactly title
-    func testSearchSerie() throws {
-        
-        let manager: MoviesManagerProtocol = MoviesDBManager()
-        
-        manager.searchShows(type: ShowType.serie, query: "How i met your mother")
-            .observe(on: MainScheduler.instance)
-            .subscribe(on: MainScheduler.instance)
-            .subscribe { series in
-                XCTAssertTrue(series.count > 0)
-            } onError: { error in
-                print(error.localizedDescription)
-            }.disposed(by: disposedBag)
-    }
-
+    
+    
+    
 }

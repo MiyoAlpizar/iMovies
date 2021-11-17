@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        //Starts listening to network changes
         ReachabilityHelper.shared.startListening()
+        //Starts listening to network changes
         MoviesManagerHelper.shared.startListening()
-        
         customStyle()
         return true
     }
