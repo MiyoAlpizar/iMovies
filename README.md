@@ -5,7 +5,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Proyecto desarrollado usando MVVM como patrón de arquitectura de software, usando también como base los principios de SOLID.
+Proyecto desarrollado usando MVVM como patrón de arquitectura de software, usando también como base los principios de SOLID e injección de dependencias.
 
 ## Descripción de Capas :
 
@@ -29,3 +29,8 @@ Proyecto desarrollado usando MVVM como patrón de arquitectura de software, usan
 - MoviesDBManager: Clase que implementa a MoviesManagerProtocol y que realiza las peticiones de manera online.
 - MoviesLocalDBManager: Clase que implementa a MoviesManagerProtocol y que realiza las peticiones de manera offline.
 - MoviesManagerHelper: Helper que decide cual clase realizará las peticiones, dependiendo si hay conexión a internet o no.
+ ## Principio de responsabilidad unica: 
+Es el primer principio de SOLID. Indica que cada clase debe ser encargada unicamente de una sola cosa, es decir debe tener una unica responsabilidad de ejecución, todas las variables, funciones o metodos deben estar alineados con esa responsabilidad, de esta manera tendremos un còdigo mejor organizado y escalable.
+
+## Un buen código según yo:
+A estas alturas de mi vida como desarrollador, puedo decir que un buen código debe, como principio, estar basado en una y solo una arquitectura de sofware, ya sea MVC, MVVM, Viper, etc. Comentar el codigo o las funciones que no sean tan obvias, el uso de injeccion de dependecias ya es un MUST y seguir, en la medida de lo posible, los principios de SOLID.
