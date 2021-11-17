@@ -99,7 +99,7 @@ class ManagerTests: XCTestCase {
                 
             }.disposed(by: disposedBag)
         
-        waitForExpectations(timeout: 0.5)
+        waitForExpectations(timeout: 0.8)
     }
     
     
