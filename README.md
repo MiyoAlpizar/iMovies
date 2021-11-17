@@ -7,6 +7,9 @@
 
 Proyecto desarrollado usando MVVM como patrón de arquitectura de software, usando también como base los principios de SOLID e injección de dependencias.
 
+Ejemplo de la app funcionando de manera online y offline
+https://www.youtube.com/watch?v=kG-2cPFZFiE
+
 ## Descripción de Capas :
 
 - Models: Modelos de la entidades del proyecto
