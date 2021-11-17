@@ -10,7 +10,9 @@ import Foundation
 import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
-    static let shared = TheMovieDBService()
+    
+    
+    static let shared: TheMovieDBServiceProtocol = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
     private let baseAPIURL = "https://api.themoviedb.org/3"
@@ -71,7 +73,7 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
         APIService.shared.loadURLAndDecode(url: url, completion: completion)
     }
     
-    func fetchSeriesByGener(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+    func fetchSeriesByGenre(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/discover/tv") else {
             completion(.failure(.invalidEndpoint))
             return

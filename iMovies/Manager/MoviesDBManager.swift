@@ -248,7 +248,7 @@ extension MoviesDBManager {
     }
     
     private func getSeriesByGenre(id: Int, completion: @escaping([ShowInfo]) -> ()) {
-        self.service.fetchSeriesByGener(id: id) { result in
+        self.service.fetchSeriesByGenre(id: id) { result in
             switch result {
             case .success(let response):
                 completion(self.castSeriesToShowInfo(series: response.results))

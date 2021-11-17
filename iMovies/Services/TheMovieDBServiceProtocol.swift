@@ -17,6 +17,8 @@ protocol TheMovieDBServiceProtocol {
     func searchMovies(query: String, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func searchSeries(query: String, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
+    func fetchSeriesByGenre(id: Int, completion: @escaping(Result<SerieResults, MovieError>) ->())
+    func fetchMovies(category: ShowCategory, completion: @escaping(Result<MovieResponse, MovieError>) -> ())
     func fetchSeries(category: ShowCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
     func fetchSimilarMovies(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
@@ -60,6 +62,7 @@ enum MovieError: Error, CustomNSError {
     case invalidResponse
     case noData
     case seralizationError
+    case noConnected
     var localizedDescription: String {
         switch self {
         case .apiError:
@@ -72,6 +75,8 @@ enum MovieError: Error, CustomNSError {
             return NSLocalizedString("No data", comment: "")
         case .seralizationError:
             return NSLocalizedString("Failed to decode data", comment: "")
+        case .noConnected:
+            return NSLocalizedString("There is not internet connection", comment: "")
         }
     }
     

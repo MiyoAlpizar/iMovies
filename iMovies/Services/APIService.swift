@@ -16,11 +16,14 @@ class APIService {
     let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
-    
-    
-    private init() { }
+   
+   
     
     func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping(Result<D, MovieError>) -> ()) {
+        guard ReachabilityHelper.shared.isReachable else {
+            completion(.failure(.noConnected))
+            return
+        }
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             completion(.failure(.invalidEndpoint))
             return
@@ -77,3 +80,6 @@ class APIService {
         }
     }
 }
+
+
+

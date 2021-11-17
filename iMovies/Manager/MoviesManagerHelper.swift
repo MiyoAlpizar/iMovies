@@ -9,20 +9,21 @@ import Foundation
 
 
 ///Manages movie manager when internet is gone or back
-class MoviesManagerHelper: ReachabilityObserverDelegate {
+class MoviesManagerHelper: ReachabilyDelegate {
     
     static let shared = MoviesManagerHelper()
     
-    private init() {
-        ///Observes for any internet connecion status changes
-        try? addReachabilityObserver()
+    private init() {}
+    
+    func startListening() {
+        ReachabilityHelper.shared.addListener(listener: self)
     }
     
     deinit {
-        removeReachabilityObserver()
+        ReachabilityHelper.shared.removeListener(listener: self)
     }
     ///Fetching movies manager protocol
-    var manager: MoviesManagerProtocol = MoviesDBManager()
+    var manager: MoviesManagerProtocol = MoviesLocalDBManager()
     
     func reachabilityChanged(_ isReachable: Bool) {
         //if lost connection, will fetch movies from local data base persisted (offline)
