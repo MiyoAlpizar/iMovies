@@ -19,7 +19,6 @@
 		6A74C8C42740401F00376CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8C32740401F00376CDA /* SceneDelegate.swift */; };
 		6A74C8CB2740402000376CDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A74C8CA2740402000376CDA /* Assets.xcassets */; };
 		6A74C8CE2740402000376CDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A74C8CC2740402000376CDA /* LaunchScreen.storyboard */; };
-		6A74C8D92740402000376CDA /* iMoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8D82740402000376CDA /* iMoviesTests.swift */; };
 		6A74C8E32740402000376CDA /* iMoviesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8E22740402000376CDA /* iMoviesUITests.swift */; };
 		6A74C8E52740402000376CDA /* iMoviesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8E42740402000376CDA /* iMoviesUITestsLaunchTests.swift */; };
 		6A74C8FE2740431500376CDA /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74C8FD2740431500376CDA /* HomeRouter.swift */; };
@@ -132,7 +131,6 @@
 		6A74C8CD2740402000376CDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A74C8CF2740402000376CDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A74C8D42740402000376CDA /* iMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A74C8D82740402000376CDA /* iMoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMoviesTests.swift; sourceTree = "<group>"; };
 		6A74C8DE2740402000376CDA /* iMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A74C8E22740402000376CDA /* iMoviesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMoviesUITests.swift; sourceTree = "<group>"; };
 		6A74C8E42740402000376CDA /* iMoviesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMoviesUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 		6A74C8D72740402000376CDA /* iMoviesTests */ = {
 			isa = PBXGroup;
 			children = (
-				6A74C8D82740402000376CDA /* iMoviesTests.swift */,
 				6AA6EFD1274567610099DB24 /* ManagerTests.swift */,
 				6AA6EFD32745781E0099DB24 /* MovieServiceTests.swift */,
 			);
@@ -1038,7 +1035,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A74C8D92740402000376CDA /* iMoviesTests.swift in Sources */,
 				6AA6EFD2274567610099DB24 /* ManagerTests.swift in Sources */,
 				6AA6EFD42745781E0099DB24 /* MovieServiceTests.swift in Sources */,
 			);
