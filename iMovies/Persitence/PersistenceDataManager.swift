@@ -19,21 +19,19 @@ class PersistenceDataManager {
         
         //Add Or Update Movies
         realmService.AddOrUpdate(movies)
-        saveGenreAndMovies(movies: movies)
-        
         //Get the movies Ids
         let ids = movies.reduce([Int](), { $0 + [$1.id] })
         
         //Create new object to store movies ids with category
         let categoryMovies = CategoryMovies()
-        
         categoryMovies.category = category.rawValue
         categoryMovies.idMovies = ids.toList()
-        
         //Add or update category movies array
         realmService.AddOrUpdate(categoryMovies)
         
         
+        //Saves Genres and movies Ids
+        saveGenreAndMovies(movies: movies)
         //save images on cache
         saveMovieImages(movies: movies)
     }
