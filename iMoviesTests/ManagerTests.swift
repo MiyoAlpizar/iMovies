@@ -60,7 +60,7 @@ class ManagerTests: XCTestCase {
     
     //should return the same movie searching online and then offline as always there is internet connection
     func testSameMovieOnlineOffLine() {
-        let movieTitle = "Apex"
+        let movieTitle = "Free Guy"
         
         var onlineMovie: ShowInfo?
         var offlineMovie: ShowInfo?
