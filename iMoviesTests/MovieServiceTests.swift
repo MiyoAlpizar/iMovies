@@ -14,6 +14,8 @@ class MovieServiceTests: XCTestCase {
     
     ///Should return  movies array as always as there is internet connection
     func testFetchMovies() {
+        
+        let expectation = expectation(description: "Waiting for result")
         service.fetchMovies(category: ShowCategory.popular) { results in
             switch results {
             case .success(let response):
@@ -21,11 +23,15 @@ class MovieServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertTrue(false, error.localizedDescription)
             }
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 0.5)
     }
     
     ///Should return  series array as always as there is internet connection
     func testFetchSeries() {
+        let expectation = expectation(description: "Waiting for result")
+        
         service.fetchSeries(category: ShowCategory.popular) { results in
             switch results {
             case .success(let response):
@@ -33,11 +39,14 @@ class MovieServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertTrue(false, error.localizedDescription)
             }
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 0.5)
     }
     
     ///Should return  genre array as always as there is internet connection
     func testFetchGenres() {
+        let expectation = expectation(description: "Waiting for result")
         service.fetchGenres(type: ShowType.serie) { results in
             switch results {
             case .success(let response):
@@ -45,6 +54,8 @@ class MovieServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertTrue(false, error.localizedDescription)
             }
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 0.5)
     }
 }
