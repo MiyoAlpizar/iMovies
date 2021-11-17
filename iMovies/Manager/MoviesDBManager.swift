@@ -82,36 +82,6 @@ class MoviesDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getMoviesByCategory(catgeory: ShowCategory) -> Observable<[Movie]> {
-        return Observable.create { observer in
-            self.service.fetchMovies(category: catgeory) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
-                }
-                observer.onCompleted()
-            }
-            return Disposables.create {}
-        }
-    }
-    
-    func getSeriesByCategory(category: ShowCategory) -> Observable<[Serie]> {
-        return Observable.create { observer in
-            self.service.fetchSeries(category: category) { result in
-                switch result {
-                case .success(let response):
-                    observer.onNext(response.results)
-                case .failure(let error):
-                    observer.onError(error)
-                }
-                observer.onCompleted()
-            }
-            return Disposables.create {}
-        }
-    }
-    
     func getShowsByCategory(type: ShowType, category: ShowCategory) -> Observable<[ShowInfo]> {
         return Observable.create { observer in
             
@@ -146,6 +116,24 @@ class MoviesDBManager: MoviesManagerProtocol {
                 })
             }
             return Disposables.create {}
+        }
+    }
+    
+    func getSimilarShows(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            switch type {
+            case .movie:
+                self.getSimilarMovies(id: id) { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
+                }
+            case .serie:
+                self.getSimilarSeries(id: id) { shows in
+                    observer.onNext(shows)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create{ }
         }
     }
     
@@ -289,6 +277,28 @@ extension MoviesDBManager {
             case .success(let series):
                 completion(self.castSeriesToShowInfo(series: series.results))
                 PersistenceDataManager.shared.saveSeries(serie: series.results)
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
+    private func getSimilarMovies(id: Int, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.fetchSimilarMovies(id: id) { result in
+            switch result {
+                case .success(let movies):
+                completion(self.castMoviesToShowInfo(movies: movies.results))
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
+    private func getSimilarSeries(id: Int, completion: @escaping([ShowInfo]) -> ()) {
+        self.service.fetchSimilarSeries(id: id) { result in
+            switch result {
+                case .success(let series):
+                completion(self.castSeriesToShowInfo(series: series.results))
             case .failure:
                 completion([])
             }

@@ -16,33 +16,43 @@ class DetailView: UIViewController {
     private var disposeBag = DisposeBag()
     @IBOutlet weak var posterImg: UIImageView!
     @IBOutlet weak var videoPlayerView: YTPlayerView!
-    @IBOutlet weak var movieImage: UIImageView!
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var movieInfo: UILabel!
-    @IBOutlet weak var movieVotes: UILabel!
-    @IBOutlet weak var moviewOverView: UILabel!
     
+    
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var viewModel: DetailViewModel = DetailViewModel()
     
     public var showInfo: ShowInfo?
+    public var similarShows = [ShowInfo]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         videoPlayerView.isHidden = true
+        setupTableView()
         if let showInfo = showInfo {
             setData(showInfo: showInfo)
         }
     }
     
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorColor = .clear
+        tableView.alwaysBounceVertical = true
+        tableView.rowHeight = Constants.Sizes.MediumPoster.height
+        tableView.register(UINib(nibName: PostersViewCell.NAME, bundle: Bundle.main), forCellReuseIdentifier: PostersViewCell.NAME)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     private func setData(showInfo: ShowInfo) {
         posterImg.sd_setImage(with: showInfo.landscapePoster!, completed: nil)
-        movieImage.sd_setImage(with: showInfo.portraitPoster!, completed: nil)
-        movieInfo.text = "R - \(showInfo.date ?? "No date")"
-        movieTitle.text = showInfo.name
-        movieVotes.text = "\(showInfo.voteAverage)%"
-        moviewOverView.text = showInfo.overview
         loadVideos(id: showInfo.id, type: showInfo.type)
+        loadSimilarShows(id: showInfo.id, type: showInfo.type)
     }
     
     private func loadVideos(id: Int, type: ShowType) {
@@ -57,5 +67,25 @@ class DetailView: UIViewController {
                 print(error.localizedDescription)
             } .disposed(by: disposeBag)
 
+    }
+    
+    private func loadSimilarShows(id: Int, type: ShowType) {
+        viewModel.loadSimilarShows(type: type, id: id)
+            .subscribe(on:MainScheduler.instance)
+            .observe(on:MainScheduler.instance)
+            .subscribe { shows in
+                self.similarShows = shows
+                self.reloadTableView()
+            } onError: { error in
+                print(error.localizedDescription)
+            } .disposed(by: disposeBag)
+
+    }
+    
+    private func reloadTableView() {
+        DispatchQueue.main.async { [self] in
+            self.tableView.reloadData()
+            
+        }
     }
 }

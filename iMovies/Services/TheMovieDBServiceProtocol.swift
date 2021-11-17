@@ -19,7 +19,8 @@ protocol TheMovieDBServiceProtocol {
     func fetchMovieByGener(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
     func fetchSeries(category: ShowCategory, completion: @escaping(Result<SerieResults, MovieError>) -> ())
     func fetchSerie(id: Int, completion: @escaping(Result<Serie, MovieError>) -> ())
-    
+    func fetchSimilarMovies(id: Int, completion: @escaping(Result<MovieResponse, MovieError>) ->())
+    func fetchSimilarSeries(id: Int, completion: @escaping(Result<SerieResults, MovieError>) ->())
 }
 
 enum ShowCategory: String {
@@ -30,6 +31,7 @@ enum ShowCategory: String {
     case latest
     case airingToday = "airing_today"
     case onTheAir = "on_the_air"
+    case similiar = "similar"
     var description: String {
         switch self {
         case .nowPlaying:
@@ -46,6 +48,8 @@ enum ShowCategory: String {
             return NSLocalizedString("Aring Today", comment: "")
         case .onTheAir:
             return NSLocalizedString("On The Air", comment: "")
+        case .similiar:
+            return NSLocalizedString("Similars", comment: "")
         }
     }
 }

@@ -18,4 +18,8 @@ class DetailViewModel {
         return MoviesManagerHelper.shared.manager.getVideos(type: type, id: id)
     }
     
+    func loadSimilarShows(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
+        return MoviesManagerHelper.shared.manager.getSimilarShows(type: type, id: id)
+    }
+    
 }

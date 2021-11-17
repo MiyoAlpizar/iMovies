@@ -56,7 +56,6 @@ class PostersViewCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(UINib(nibName: MoviePosterCell.NAME, bundle: nil), forCellWithReuseIdentifier: MoviePosterCell.NAME)
         collectionView.collectionViewLayout = layout
-        
     }
 }
 

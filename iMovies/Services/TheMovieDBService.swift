@@ -10,7 +10,6 @@ import Foundation
 import Foundation
 
 class TheMovieDBService: TheMovieDBServiceProtocol {
-    
     static let shared = TheMovieDBService()
     private init() {}
     private let apiKey = "352b18bc177a50f14c037b2549d7c6c9"
@@ -120,5 +119,21 @@ class TheMovieDBService: TheMovieDBServiceProtocol {
                                 "query": query
                                ],
                               completion: completion)
+    }
+    
+    func fetchSimilarMovies(id: Int, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/similar") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        APIService.shared.loadURLAndDecode(url: url, completion: completion)
+    }
+    
+    func fetchSimilarSeries(id: Int, completion: @escaping (Result<SerieResults, MovieError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/tv/\(id)/simial") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        APIService.shared.loadURLAndDecode(url: url, completion: completion)
     }
 }

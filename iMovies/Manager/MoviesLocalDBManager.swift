@@ -10,45 +10,7 @@ import RxSwift
 
 ///Fetches movies from local data base in order to keep alive offline
 class MoviesLocalDBManager: MoviesManagerProtocol {
-    
     let service = TheMovieDBService.shared
-    
-    func getShowsByCategory(type: ShowType, category: ShowCategory) -> Observable<[ShowInfo]> {
-        return Observable.create { observer in
-            observer.onNext(self.getMovieByCategory(category: category))
-            observer.onCompleted()
-            return Disposables.create {}
-        }
-    }
-    
-    func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
-        return Observable.create { observer in
-            switch type {
-            case .movie:
-                observer.onNext(self.getMoviesByGenre(genreId: id))
-            case .serie:
-                observer.onNext(self.getSeriesByGenre(genreId: id))
-            }
-            observer.onCompleted()
-            return Disposables.create {}
-        }
-    }
-    
-    func searchShows(type: ShowType, query: String) -> Observable<[ShowInfo]> {
-        return Observable.create { observer in
-            observer.onNext([])
-            observer.onCompleted()
-            return Disposables.create {}
-        }
-    }
-    
-    func getVideos(type: ShowType, id: Int) -> Observable<[MovieVideo]> {
-        return Observable.create { observer in
-            observer.onNext([])
-            observer.onCompleted()
-            return Disposables.create {}
-        }
-    }
     
     func getHomeShows(type: ShowType) -> Observable<[Poster]> {
         return Observable.create { observer in
@@ -72,7 +34,46 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getMoviesByCategory(catgeory: ShowCategory) -> Observable<[Movie]> {
+    func getShowsByCategory(type: ShowType, category: ShowCategory) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            switch type {
+            case .movie:
+                observer.onNext(self.getMovieByCategory(category: category))
+            case .serie:
+                observer.onNext(self.getSerieByCategory(category: category))
+            }
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
+    func getShowsByGenre(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            switch type {
+            case .movie:
+                observer.onNext(self.getMoviesByGenre(genreId: id))
+            case .serie:
+                observer.onNext(self.getSeriesByGenre(genreId: id))
+            }
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
+    func searchShows(type: ShowType, query: String) -> Observable<[ShowInfo]> {
+        return Observable.create { observer in
+            switch type {
+            case .movie:
+                observer.onNext(self.filterMovies(query: query.lowercased()))
+            case .serie:
+                observer.onNext(self.filterSeries(query: query.lowercased()))
+            }
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
+    func getVideos(type: ShowType, id: Int) -> Observable<[MovieVideo]> {
         return Observable.create { observer in
             observer.onNext([])
             observer.onCompleted()
@@ -80,14 +81,11 @@ class MoviesLocalDBManager: MoviesManagerProtocol {
         }
     }
     
-    func getSeriesByCategory(category: ShowCategory) -> Observable<[Serie]> {
+    func getSimilarShows(type: ShowType, id: Int) -> Observable<[ShowInfo]> {
         return Observable.create { observer in
-            observer.onNext([])
-            observer.onCompleted()
-            return Disposables.create {}
+            return Disposables.create{ }
         }
     }
-    
 }
 
 extension MoviesLocalDBManager {
@@ -136,9 +134,7 @@ extension MoviesLocalDBManager {
         if let categoryMovies = categoryMovies {
             let ids = Array(categoryMovies.idMovies.map({ Int($0) }))
             let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", ids)
-            for item in movies {
-                shows.append(item.toShowInfo())
-            }
+            shows.append(contentsOf: movies.map({ $0.toShowInfo() }))
         }
         return shows
     }
@@ -149,9 +145,7 @@ extension MoviesLocalDBManager {
         if let categoryMobies = categorySeries {
             let ids = Array(categoryMobies.idSeries.map({ Int($0) }))
             let series = RealmService.shared.realm.objects(Serie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", ids)
-            for item in series {
-                shows.append(item.toShowInfo())
-            }
+            shows.append(contentsOf: series.map({ $0.toShowInfo() }))
         }
         return shows
     }
@@ -181,9 +175,7 @@ extension MoviesLocalDBManager {
         let genres = RealmService.shared.realm.objects(MoviesGenre.self).filter("genreId == \(genreId)")
         let moviesIds = Array(genres.map({ Int($0.movieId) }))
         let movies = RealmService.shared.realm.objects(Movie.self).filter("id IN %@ AND backdropPath != nil AND posterPath != nil", moviesIds)
-        for item in movies {
-            shows.append(item.toShowInfo())
-        }
+        shows.append(contentsOf: movies.map({ $0.toShowInfo() }))
         return shows
     }
     
@@ -195,6 +187,24 @@ extension MoviesLocalDBManager {
         for item in series {
             shows.append(item.toShowInfo())
         }
+        return shows
+    }
+    
+    private func filterMovies(query: String) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let movies = RealmService.shared.realm.objects(Movie.self).filter { movie in
+            return movie.title.lowercased().contains(query) && movie.backdropURL != nil && movie.posterPath != nil
+        }
+        shows.append(contentsOf: movies.map({ $0.toShowInfo() }))
+        return shows
+    }
+    
+    private func filterSeries(query: String) -> [ShowInfo] {
+        var shows = [ShowInfo]()
+        let series = RealmService.shared.realm.objects(Serie.self).filter { serie in
+            return serie.name.lowercased().contains(query) && serie.backdropURL != nil && serie.posterPath != nil
+        }
+        shows.append(contentsOf: series.map({ $0.toShowInfo() }))
         return shows
     }
 }
