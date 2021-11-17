@@ -55,10 +55,10 @@ class ManagerTests: XCTestCase {
                 XCTAssertGreaterThan(shows.count, 0)
                 expectation.fulfill()
             }.disposed(by: disposedBag)
-        waitForExpectations(timeout: 0.1)
+        waitForExpectations(timeout: 0.3)
     }
     
-    //should return the same movie searching online and then offline
+    //should return the same movie searching online and then offline as always there is internet connection
     func testSameMovieOnlineOffLine() {
         let movieTitle = "Apex"
         
